@@ -25,6 +25,10 @@ public class AppointmentEntity{
     @ManyToOne(fetch = fetchType.LAZY)
     @joinColumn(name = "patient_id")
     private PatientEntity patientEntity;
+
+    @ManyToOne(fetch = fetchType.LAZY)
+    @JoinColumn(name = "doctor_id")
+    private DoctorEntity doctorEntity;
     
 
 // Enums
