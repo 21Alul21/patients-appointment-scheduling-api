@@ -5,7 +5,7 @@
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientEntity
+public class PatientEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID patientID;
@@ -26,3 +26,4 @@ public class PatientEntity
     @OneToMany(mappedBy = "patientEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AppointmentEntity> appointmentEntity = new ArrayList<>();
 
+}
