@@ -21,6 +21,9 @@ public class PatientEntity{
     @Enumerated(EnumType.STRING)
     private SpecializationEnum specialization;
     private DateTime registeredAt;
+    @OneToMany(mappedBy = "patientEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PatientEntity> patientEntity = new ArrayList<>();
+    
     
 
     public Enum SpecializationEnum{
