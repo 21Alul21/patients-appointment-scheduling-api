@@ -12,9 +12,4 @@ public class AdminEntity{
     private DateTime dateAccountCreated;
     private String role;
 
-    // Enum
-public Enum AdminRoleEnum{
-    
-}
-
 }
