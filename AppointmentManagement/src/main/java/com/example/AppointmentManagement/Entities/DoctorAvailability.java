@@ -5,16 +5,17 @@
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientEntity{
+public class DoctorAvailability{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID DoctorID;
-    private String firstName;
-    private String lastNmame;
+    private UUID doctorAvailabilityID;
     private DateTime availableTime;
-    private String email;
     @Enumerated(EnumType.STRING)
     private SpecializationEnum specialization;
+
+    @ManyToOne(fetch = fetchType.LAZY)
+    @JoinColumn(name = "doctor_id")
+    private DoctorEntity doctorEntity;
 
     public Enum SpecializationEnum{
     GYNACOLOGIST,
