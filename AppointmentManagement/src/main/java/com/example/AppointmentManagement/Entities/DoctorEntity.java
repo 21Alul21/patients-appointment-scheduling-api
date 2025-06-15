@@ -5,7 +5,7 @@
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientEntity{
+public class DoctorEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID DoctorID;
@@ -22,9 +22,11 @@ public class PatientEntity{
     private SpecializationEnum specialization;
     private DateTime registeredAt;
    
-    @OneToMany(mappedBy = "patientEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PatientEntity> patientEntity = new ArrayList<>();
-    
+
+    @ManyToOne(mappedBy = "doctorEntity", cascade = Cascade.Type.All, orphanRemoval = true)
+    private List<DoctorAvailability> doctorAvailability = new ArrayList<>();
     
 
     public Enum SpecializationEnum{
