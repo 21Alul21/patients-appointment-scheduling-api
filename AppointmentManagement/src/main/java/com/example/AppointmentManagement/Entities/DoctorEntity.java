@@ -5,7 +5,7 @@
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientEntity{
+public class PatientEntity
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID DoctorID;
@@ -15,13 +15,18 @@ public class PatientEntity{
     private Date dateOfBirth;
     private String phoneNumber;
     private int notification;
-    private String nextOfKinPhone;
     private String meansOfIdentification;
     private String idNumber;
-    private String insuranceProvider;
-    private String insuranceNumber;
     private String email;
-    private String specialization;
+    @Enumerated(EnumType.STRING)
+    private SpecializationEnum specialization;
     private DateTime registeredAt;
+    
 
+    public Enum SpecializationEnum{
+    GYNACOLOGIST,
+    DENTIST,
+    OPTICIAN,
+    GENERAL_MEDICAL_SERVICES
 }
+
