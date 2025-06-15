@@ -10,8 +10,7 @@ public class AdminEntity{
     private String username;
     private String password;
     private DateTime dateAccountCreated;
-    @Enumerated(EnumType.STRING)
-    private AdminRoleEnum role;
+    private String role;
 
     // Enum
 public Enum AdminRoleEnum{
