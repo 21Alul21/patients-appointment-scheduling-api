@@ -5,7 +5,7 @@
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientEntity
+public class PatientEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID DoctorID;
@@ -29,4 +29,4 @@ public class PatientEntity
     OPTICIAN,
     GENERAL_MEDICAL_SERVICES
 }
-
+}
