@@ -16,7 +16,6 @@ public class DoctorEntity{
     private String Password;
     private Date dateOfBirth;
     private String phoneNumber;
-    private int notification;
     private String meansOfIdentification;
     private String idNumber;
     @Email(message = "please enter a valid email address")
