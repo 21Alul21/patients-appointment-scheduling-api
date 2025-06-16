@@ -16,7 +16,6 @@ public class PatientEntity{
     private String Password;
     private Date dateOfBirth;
     private String phoneNumber;
-    private int notification;
     private String nextOfKinPhone;
     private String meansOfIdentification;
     private String idNumber;
@@ -26,6 +25,9 @@ public class PatientEntity{
     private String email;
     private DateTime registeredAt;
 
+    @OneToMany(mappedBy = "personEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<NotificationEntity> notificationEntity = new ArralList<>();  
+    
     @OneToMany(mappedBy = "patientEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AppointmentEntity> appointmentEntity = new ArrayList<>();
 
