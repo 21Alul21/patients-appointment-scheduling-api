@@ -7,10 +7,14 @@ public class AppointmentEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID apointmentID;
+    @NotBlank(message = "please enter your appointment title")
     private String apointmentTitle;
     private String apointmentDescription;
+    @NotBlank(message = "please enter your first name")
     private String patientFirstName;
+    @NotBlank(message = "please enter your last name")
     private String patientLastNmame;
+    @NotBlank("please enter your appointment date and time")
     private DateTime appointmentDueDate;
     private DateTime appointmentBookedAt;
     @Enumerated(EnumType.STRING)
