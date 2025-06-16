@@ -1,6 +1,5 @@
 
 
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -9,8 +8,11 @@ public class PatientEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID patientID;
+    @NotBlank(message = "first name cannot be blank")
     private String firstName;
+    @NotBlank(message = "last name cannot be blank")
     private String lastNmame;
+    @Size(min = 5, message = "length of password should be gretater than {min}")
     private String Password;
     private Date dateOfBirth;
     private String phoneNumber;
@@ -20,6 +22,7 @@ public class PatientEntity{
     private String idNumber;
     private String insuranceProvider;
     private String insuranceNumber;
+    @Email(message = "Please Enter a valid email address")
     private String email;
     private DateTime registeredAt;
 
