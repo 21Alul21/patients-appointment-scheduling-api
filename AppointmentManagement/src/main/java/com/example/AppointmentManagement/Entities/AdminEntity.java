@@ -6,7 +6,7 @@
 public class AdminEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int adminID;
+    private int adminId;
     @NotBlank(message = "please enter your admin username")
     private String username;
     @NotBlank(mesage = "password cannot be blank")
