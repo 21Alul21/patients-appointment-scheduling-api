@@ -6,7 +6,7 @@
 public class NotificationEntity{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long notificationID;
+  private Long notificationId;
   private String message;
   private LocalDate sentAt;
   private boolean isRead;
