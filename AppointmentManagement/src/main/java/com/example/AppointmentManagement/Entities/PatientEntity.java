@@ -16,6 +16,7 @@ public class PatientEntity{
     private String Password;
     private LocalDate dateOfBirth;
     private String phoneNumber;
+    private String gender;
     private String nextOfKinPhone;
     private String meansOfIdentification;
     private String idNumber;
