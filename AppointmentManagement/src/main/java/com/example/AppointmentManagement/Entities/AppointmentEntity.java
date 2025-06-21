@@ -26,11 +26,14 @@ public class AppointmentEntity{
     @Enumerated(EnumType.STRING)
     private DoctorLastnameEnum doctorLastName;
     
-    @ManyToOne(fetch = fetchType.LAZY)
+    @OneToMany(mappedBy = "appointmentEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<NotificationEntity> notificationEntity = new ArrayList<>();
+    
+    @ManyToOne
     @joinColumn(name = "patient_id")
     private PatientEntity patientEntity;
 
-    @ManyToOne(fetch = fetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "doctor_id")
     private DoctorEntity doctorEntity;
     
