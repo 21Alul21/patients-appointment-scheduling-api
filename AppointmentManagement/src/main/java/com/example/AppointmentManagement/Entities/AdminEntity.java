@@ -9,9 +9,9 @@ public class AdminEntity{
     private int adminID;
     @NotBlank(message = "please enter your admin username")
     private String username;
-    @NotBlank("password cannot be blank")
+    @NotBlank(mesage = "password cannot be blank")
     private String password;
-    private DateTime dateAccountCreated;
+    private LocalDateTime dateAccountCreated;
     private String role;
 
 }
