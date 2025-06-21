@@ -8,7 +8,7 @@
 public class DoctorAvailability{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID doctorAvailabilityID;
+    private UUID doctorAvailabilityId;
     @NotNull(message = "please enter a convenint available time")
     private LocalDateTime availableTime;
     @Enumerated(EnumType.STRING)
