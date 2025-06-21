@@ -6,7 +6,7 @@ public class AppointmentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID appointmentID;
+    private UUID appointmentId;
 
     @NotBlank(message = "Please enter your appointment title")
     private String appointmentTitle;
