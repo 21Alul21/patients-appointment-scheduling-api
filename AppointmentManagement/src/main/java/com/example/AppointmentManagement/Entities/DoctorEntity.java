@@ -7,7 +7,7 @@
 public class DoctorEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID DoctorID;
+    private UUID DoctorId;
     @NotBlank(message = "first name cannot be blank")
     private String firstName;
     @NotBlank(message = "last name cannot be blank")
