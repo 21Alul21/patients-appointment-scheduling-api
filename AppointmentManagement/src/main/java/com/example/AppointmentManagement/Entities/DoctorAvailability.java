@@ -12,7 +12,7 @@ public class DoctorAvailability{
     @NotNull(message = "please enter a convenint available time")
     private LocalDateTime availableTime;
     @Enumerated(EnumType.STRING)
-    @NotBlank("please fill in your specialization")
+    @NotBlank(message = "please fill in your specialization")
     private SpecializationEnum specialization;
 
     @ManyToOne
