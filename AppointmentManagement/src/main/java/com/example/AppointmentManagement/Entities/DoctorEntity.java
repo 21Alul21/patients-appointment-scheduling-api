@@ -22,7 +22,7 @@ public class DoctorEntity{
     private String email;
     @Enumerated(EnumType.STRING)
     private SpecializationEnum specialization;
-    private DateTime registeredAt;
+    private LocalDateTime registeredAt;
    
     @OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PatientEntity> patientEntity = new ArrayList<>();
@@ -34,7 +34,7 @@ public class DoctorEntity{
     private List<NotificationEntity> notificationEntity = new ArrayList<>();
 
     public enum SpecializationEnum{
-    GYNACOLOGIST,
+    GYNECOLOGIST,
     DENTIST,
     OPTICIAN,
     GENERAL_MEDICAL_SERVICES
