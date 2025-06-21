@@ -9,17 +9,17 @@ public class DoctorAvailability{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID doctorAvailabilityID;
-    @NotBlank("please enter a convenint available time")
-    private DateTime availableTime;
+    @NotNull(message = "please enter a convenint available time")
+    private LocalDateTime availableTime;
     @Enumerated(EnumType.STRING)
     @NotBlank("please fill in your specialization")
     private SpecializationEnum specialization;
 
-    @ManyToOne(fetch = fetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "doctor_id")
     private DoctorEntity doctorEntity;
 
-    public Enum SpecializationEnum{
+    public enum SpecializationEnum{
     GYNACOLOGIST,
     DENTIST,
     OPTICIAN,
