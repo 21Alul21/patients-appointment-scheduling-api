@@ -14,7 +14,7 @@ public class PatientEntity{
     private String lastNmame;
     @Size(min = 5, message = "length of password should be gretater than {min}")
     private String Password;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String phoneNumber;
     private String nextOfKinPhone;
     private String meansOfIdentification;

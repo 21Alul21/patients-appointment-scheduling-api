@@ -14,7 +14,7 @@ public class DoctorEntity{
     private String lastNmame;
     @Size(min = 5, message = "length of password should be gretater than {min}")
     private String Password;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String phoneNumber;
     private String meansOfIdentification;
     private String idNumber;
@@ -33,7 +33,7 @@ public class DoctorEntity{
     @OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NotificationEntity> notificationEntity = new ArrayList<>();
 
-    public Enum SpecializationEnum{
+    public enum SpecializationEnum{
     GYNACOLOGIST,
     DENTIST,
     OPTICIAN,
