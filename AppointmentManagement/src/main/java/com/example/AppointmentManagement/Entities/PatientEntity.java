@@ -23,7 +23,7 @@ public class PatientEntity{
     private String insuranceNumber;
     @Email(message = "Please Enter a valid email address")
     private String email;
-    private DateTime registeredAt;
+    private LocalDateTime registeredAt;
 
     @OneToMany(mappedBy = "personEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NotificationEntity> notificationEntity = new ArralList<>();  
