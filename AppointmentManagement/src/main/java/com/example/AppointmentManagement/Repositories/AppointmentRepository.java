@@ -1,3 +1,3 @@
 
-public interface AppointmentRepository extends JPARepository<AppointmentEntity, Long>{
+public interface AppointmentRepository extends JPARepository<AppointmentEntity, UUID>{
 }
