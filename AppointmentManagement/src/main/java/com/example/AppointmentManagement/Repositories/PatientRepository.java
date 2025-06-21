@@ -1,2 +1,2 @@
-public interface PatientRepository extends JPARepository<UUID, PatientEntity>{
+public interface PatientRepository extends JPARepository<PatientEntity, UUID>{
 }
