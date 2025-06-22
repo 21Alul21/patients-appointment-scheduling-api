@@ -1,17 +1,17 @@
-
 @Service
-public class PatientService{
-  private final PatientRepository patientRepository;
-  private final PateintMapper PatientMapper;
-  
-  public PatientService(PatienRepository patientRepository, PatientDTO patientDTO, DTOMapper dtoMapper){
-    this.patientRepository = patientRepository;
-  }
+public class PatientService {
+    private final PatientRepository patientRepository;
+    private final PatientMapper patientMapper;
 
-  public List<PatientDTO> getPatients(){
+    public PatientService(PatientRepository patientRepository, PatientMapper patientMapper) {
+        this.patientRepository = patientRepository;
+        this.patientMapper = patientMapper;
+    }
 
-  List<PatientDTO> patientDTO = patientRepository.findAll()
- .stream().map(patientEntity->patientMapper.toDTO(patientEntity)).collect(Collectors.toList());
-    return patientDTO;
-  }
+    public List<PatientDTO> getPatients() {
+        return patientRepository.findAll()
+                .stream()
+                .map(patientMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 }
