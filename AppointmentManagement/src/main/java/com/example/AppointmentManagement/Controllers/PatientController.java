@@ -33,7 +33,7 @@ public class PatientController {
     @DeleteMapping("/delete-patient/{patientId}")
     public ResponseEntity<Void> deletePatient(@PathVariable UUID patientId) {
     patientService.deletePatient(patientId);
-    return ResponseEntity.noContent().build();  // returns 204
+    return ResponseEntity.noContent().build(); 
 }
 
 }
