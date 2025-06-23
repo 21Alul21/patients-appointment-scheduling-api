@@ -12,4 +12,9 @@ public class PatientController {
     public ResponseEntity<PatientDTO> getPatient(@PathVariable UUID patientId) {
         return ResponseEntity.ok(patientService.getPatient(patientId));
     }
+
+    @GetMapping("/patients-list")
+    @public ResponseEntity<List<PatientDTO>> getpatients(){
+    return ResponseEntity.ok(patientService.getPatients());
+    }
 }
