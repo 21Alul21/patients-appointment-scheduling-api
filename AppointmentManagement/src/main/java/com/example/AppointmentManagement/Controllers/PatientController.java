@@ -14,7 +14,7 @@ public class PatientController {
     }
 
     @GetMapping("/patients-list")
-    @public ResponseEntity<List<PatientDTO>> getpatients(){
+    @public ResponseEntity<List<PatientDTO>> getPatients(){
     return ResponseEntity.ok(patientService.getPatients());
     }
 }
