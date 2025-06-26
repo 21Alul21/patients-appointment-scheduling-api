@@ -9,7 +9,7 @@ public class DoctorController{
   }
   @GetMapping("/{doctorId}")
   public ResponseEntity<DoctorDTO> getDoctor(@PathVariable UUID doctorId){
-    return ResponseEntity.ok(DoctorService.getDoctor(doctorId));
+    return ResponseEntity.ok(doctorService.getDoctor(doctorId));
   }
 
   @GetMapping("/all")
@@ -25,8 +25,8 @@ public class DoctorController{
   }
 
   @PatchMapping("/update-profile/{doctorId}")
-  public ResponseEntity<DoctorEntity> updateDoctor(@RequestBody DoctorEntity doctorEntity, doctorId){
-   return ResponseEntity.ok(doctorService.updateDoctor(doctorEntity));
+  public ResponseEntity<DoctorEntity> updateDoctor(@RequestBody DoctorEntity doctorEntity, @PathVariable UUID doctorId){
+   return ResponseEntity.ok(doctorService.updateDoctor(doctorEntity, doctorId));
   }
 
   @DeleteMapping("/delete-account/{doctorId}")
