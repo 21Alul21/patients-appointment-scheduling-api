@@ -6,5 +6,19 @@ Public class EnumClass{
     GENERAL_MEDICAL_SERVICES
 }
 
+  public enum AppointmentStatusEnum {
+        PENDING,
+        BOOKED,
+        DECLINED,
+        RESCHEDULED
+    }
+
+    public enum StatusEnum {
+        PENDING,
+        ACCEPTED,
+        RECHEDULED,
+        CANCELED
+    }
+
   
 }
