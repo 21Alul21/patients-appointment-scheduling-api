@@ -12,30 +12,29 @@ public class DoctorController{
     return ResponseEntity.ok(DoctorService.getDoctor(doctorId));
   }
 
-  @GetMapping("/doctor")
-  public ResponseEntity<List<DocrorDTO>> getDoctors(){
+  @GetMapping("/all")
+  public ResponseEntity<List<DoctorDTO>> getDoctors(){
     return ResponseEntity.ok(doctorService.getDoctors());
   }
 
   @PostMapping("/register-doctor")
   public ResponseEntity<DoctorEntity> registerDoctor(@RequestBody DoctorEntity doctorEntity){
     return ResponseEntity
-      .status(httpStatus.CREATED)
+      .status(HttpStatus.CREATED)
       .ok(doctorService.createDoctor(doctorEntity));
   }
 
   @PatchMapping("/update-profile")
   public ResponseEntity<DoctorEntity> updateDoctor(@RequestBody DoctorEntity doctorEntity){
-   return ResponseEntity.ok(DoctorService.updateDoctor(dictorEntity));
+   return ResponseEntity.ok(doctorService.updateDoctor(dictorEntity));
   }
 
   @DeleteMapping("/delete-account")
-  @public ResponseEntity<Void> deleteDoctor(@PathVariable UUID doctorId){
+  public ResponseEntity<Void> deleteDoctor(@PathVariable UUID doctorId){
     doctorService.deleteDoctor(doctorId);
    return ResponseEntity
      .noContent()
      .build()
-     .ok();
   }
 
 }
