@@ -1,3 +1,10 @@
 Public class EnumClass{
-  public enum 
+  public enum SpecializationEnum{
+    GYNECOLOGIST,
+    DENTIST,
+    OPTICIAN,
+    GENERAL_MEDICAL_SERVICES
+}
+
+  
 }
