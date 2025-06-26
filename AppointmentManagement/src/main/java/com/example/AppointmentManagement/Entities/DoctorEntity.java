@@ -32,11 +32,4 @@ public class DoctorEntity{
 
     @OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NotificationEntity> notificationEntity = new ArrayList<>();
-
-    public enum SpecializationEnum{
-    GYNECOLOGIST,
-    DENTIST,
-    OPTICIAN,
-    GENERAL_MEDICAL_SERVICES
-}
 }
