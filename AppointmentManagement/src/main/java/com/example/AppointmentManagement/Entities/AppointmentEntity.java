@@ -34,18 +34,4 @@ public class AppointmentEntity {
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private DoctorEntity doctorEntity;
-
-    public enum AppointmentStatusEnum {
-        PENDING,
-        BOOKED,
-        DECLINED,
-        RESCHEDULED
-    }
-
-    public enum SpecializationEnum {
-        GYNECOLOGIST,
-        DENTIST,
-        OPTICIAN,
-        GENERAL_MEDICAL_SERVICES
-    }
 }
