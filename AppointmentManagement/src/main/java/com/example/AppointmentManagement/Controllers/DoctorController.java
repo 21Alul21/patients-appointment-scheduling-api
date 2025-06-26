@@ -18,11 +18,24 @@ public class DoctorController{
   }
 
   @PostMapping("/register-doctor")
-  public ResponseEntity<DoctorEntity> registerDoctor(DoctorEntity doctorEntity){
-    return ResponseEntity.ok(doctorService.createDoctor(doctorEntity));
+  public ResponseEntity<DoctorEntity> registerDoctor(@RequestBody DoctorEntity doctorEntity){
+    return ResponseEntity
+      .status(httpStatus.CREATED)
+      .ok(doctorService.createDoctor(doctorEntity));
   }
 
   @PatchMapping("/update-profile")
-  
+  public ResponseEntity<DoctorEntity> updateDoctor(@RequestBody DoctorEntity doctorEntity){
+   return ResponseEntity.ok(DoctorService.updateDoctor(dictorEntity));
+  }
+
+  @DeleteMapping("/delete-account")
+  @public ResponseEntity<Void> deleteDoctor(@PathVariable UUID doctorId){
+    doctorService.deleteDoctor(doctorId);
+   return ResponseEntity
+     .noContent()
+     .build()
+     .ok();
+  }
 
 }
