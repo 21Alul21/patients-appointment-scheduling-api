@@ -21,20 +21,20 @@ public class DoctorController{
   public ResponseEntity<DoctorEntity> registerDoctor(@RequestBody DoctorEntity doctorEntity){
     return ResponseEntity
       .status(HttpStatus.CREATED)
-      .ok(doctorService.createDoctor(doctorEntity));
+      .body(doctorService.createDoctor(doctorEntity));
   }
 
-  @PatchMapping("/update-profile")
-  public ResponseEntity<DoctorEntity> updateDoctor(@RequestBody DoctorEntity doctorEntity){
-   return ResponseEntity.ok(doctorService.updateDoctor(dictorEntity));
+  @PatchMapping("/update-profile/{doctorId}")
+  public ResponseEntity<DoctorEntity> updateDoctor(@RequestBody DoctorEntity doctorEntity, doctorId){
+   return ResponseEntity.ok(doctorService.updateDoctor(doctorEntity));
   }
 
-  @DeleteMapping("/delete-account")
+  @DeleteMapping("/delete-account/{doctorId}")
   public ResponseEntity<Void> deleteDoctor(@PathVariable UUID doctorId){
     doctorService.deleteDoctor(doctorId);
    return ResponseEntity
      .noContent()
-     .build()
+     .build();
   }
 
 }
