@@ -1,5 +1,5 @@
 @RestController
-@RequestMapping("/patients") // Corrected the typo
+@RequestMapping("/patients")
 public class PatientController {
 
     private final PatientService patientService;
