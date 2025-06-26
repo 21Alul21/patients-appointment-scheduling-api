@@ -24,14 +24,5 @@ public class NotificationEntity{
   @ManyToOne
   @JoinColumn(name = "patient_recepient_id")
   Private PatientEntity patientEntity;
-  
-  
-  public enum StatusEnum{
-    PENDING,
-    CONFIRMED,
-    RESCHEDULED,
-    CANCELED,
-    COMPLETED
-  }
 
 }
