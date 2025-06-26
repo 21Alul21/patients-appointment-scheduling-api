@@ -18,12 +18,5 @@ public class DoctorAvailability{
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private DoctorEntity doctorEntity;
-
-    public enum SpecializationEnum{
-    GYNACOLOGIST,
-    DENTIST,
-    OPTICIAN,
-    GENERAL_MEDICAL_SERVICES
-}
 }
 
