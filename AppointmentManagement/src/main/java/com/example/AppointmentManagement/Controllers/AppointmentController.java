@@ -14,12 +14,12 @@ public class AppointmentController{
    createdAppointment = appointmentService.createAppointment(appointmentEntity);
    NotificationEntity notificationEntity = new NotificationEntity();
    notificationEntity.setMessage("new appointment created");
-   notificationEntity.setSentAt(new LocalDate().now());
-   notificationEntity.setIsRead("false");
+   notificationEntity.setSentAt(LocalDateTime().now());
+   notificationEntity.setIsRead(false);
    notificationEntity.setStatus("PENDING");
    notificationService.createNotification(notificationEntity);
     return ResponseEntity
     .status(HttpStatus.CREATED)
-    .build();
+    .body(createdAppointment);
   }
 }
