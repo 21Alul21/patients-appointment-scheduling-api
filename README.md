@@ -1,3 +1,6 @@
+## 📖 License
+This project is licensed under the [MIT License](./LICENSE).
+
 # 🏥 MedManage API – Multi-Tenant Medical Management System
 
 ## 📌 Description
