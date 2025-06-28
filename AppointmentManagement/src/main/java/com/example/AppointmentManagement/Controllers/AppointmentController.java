@@ -39,4 +39,15 @@ public class AppointmentController{
     rerurn ResponseEntiy.ok(appointmentService.getAppointments());
   }
 
+  // get a particular appointment
+  @GetMapping("/get-appointment/{id}")
+  public ResponseEntity<AppointmentEntity> getAppointments(@PathVariable UUID id){
+    return ResponseEntity.ok(appointmentService.findById(id));
+  }
+
+  // update an appointment 
+  @PatchMapping("/update-appointment")
+  @public AppointmentEntity updateAppointment(@RequestBody AppointmentEntity appointmentEntity, @PathVariable UUID id){
+  }
+
 }
