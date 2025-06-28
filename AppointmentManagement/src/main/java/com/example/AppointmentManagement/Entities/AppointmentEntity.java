@@ -33,5 +33,5 @@ public class AppointmentEntity {
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
-    private DoctorEntity doctorEntity;
+    private DoctorEntity doctor;
 }
