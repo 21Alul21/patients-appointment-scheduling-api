@@ -39,7 +39,7 @@ public PatientDTO deletePatient(UUID patientId) {
     
     patientRepository.deleteById(patientId);
 
-    return patientMapper.toDTO(patient); // Optional: return deleted patient data
+    return patientMapper.toDTO(patient); 
 }
 
 
@@ -55,7 +55,7 @@ public PatientEntity updatePatient(PatientEntity updatedData, UUID patientId) {
     existingPatient.setLastName(updatedData.getLastName());
     existingPatient.setAge(updatedData.getAge());
     existingPatient.setEmail(updatedData.getEmail());
-    // Add more fields as necessary
+    
 
     return patientRepository.save(existingPatient);
 }
