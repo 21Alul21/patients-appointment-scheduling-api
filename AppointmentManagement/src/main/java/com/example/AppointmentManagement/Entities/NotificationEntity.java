@@ -19,7 +19,7 @@ public class NotificationEntity{
 
   @ManyToOne
   @JoinColumn(name = "doctor_recepient_id")
-  Private DoctorEntity doctorEntity;
+  Private DoctorEntity doctor;
   
   @ManyToOne
   @JoinColumn(name = "patient_recepient_id")
