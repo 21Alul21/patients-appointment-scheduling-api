@@ -47,7 +47,11 @@ public class AppointmentController{
 
   // update an appointment 
   @PatchMapping("/update-appointment")
-  @public AppointmentEntity updateAppointment(@RequestBody AppointmentEntity appointmentEntity, @PathVariable UUID id){
+  public ResponseEntity<AppointmentEntity> updateAppointment(@RequestBody AppointmentEntity appointmentEntity, @PathVariable UUID id){
+   AppointmenEntity update = appointmentService.updateAppointment(appointmentEntity, id);
+    return ResponseEntity
+     .status(HttpStatus.UPDATED)
+     .body(update);
   }
 
 }
