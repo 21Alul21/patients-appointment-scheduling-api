@@ -12,6 +12,7 @@ public class AppointmentController{
   this.doctorRepository = doctorRepository;
   }
 
+  // crete appointment and notification
   @PostMapping("/create-appointment")
   public ResponseEntity<AppointmentEntity> createAppointment(@RequestBody AppointmentEntity appointmentEntity){
     DoctorEntity doctor = doctorRepository.findDoctorById(appointmentEntity.getDoctorId());
@@ -31,4 +32,11 @@ public class AppointmentController{
     .status(HttpStatus.CREATED)
     .body(createdAppointment);
   }
+
+  // get all appointments
+  @GetMapping("/all-appointments")
+  public ResponseEntity<List<AppointmentEntity>> getAppointments(){
+    rerurn ResponseEntiy.ok(appointmentService.getAppointments());
+  }
+
 }
