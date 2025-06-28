@@ -6,7 +6,7 @@ public class AppointmentController{
   private final AppointmentService appointmentService;
   private final NotificationService notificationService;
   private final DoctorRepository doctorRepository;
-  public AppointmentController(AppointmentService appointmentService, NotificationService notificationService){
+  public AppointmentController(AppointmentService appointmentService, NotificationService notificationService, DoctorRepository doctorRepository){
   this.appointmentService = appointmentService;
   this.notificationService = notificationService;
   this.doctorRepository = doctorRepository;
@@ -36,21 +36,21 @@ public class AppointmentController{
   // get all appointments
   @GetMapping("/all-appointments")
   public ResponseEntity<List<AppointmentEntity>> getAppointments(){
-    rerurn ResponseEntiy.ok(appointmentService.getAppointments());
+    return ResponseEntity.ok(appointmentService.getAppointments());
   }
 
   // get a particular appointment
   @GetMapping("/get-appointment/{id}")
-  public ResponseEntity<AppointmentEntity> getAppointments(@PathVariable UUID id){
+  public ResponseEntity<AppointmentEntity> getAppointment(@PathVariable UUID id){
     return ResponseEntity.ok(appointmentService.findById(id));
   }
 
   // update an appointment 
-  @PatchMapping("/update-appointment")
+  @PatchMapping("/update-appointment/{id}")
   public ResponseEntity<AppointmentEntity> updateAppointment(@RequestBody AppointmentEntity appointmentEntity, @PathVariable UUID id){
-   AppointmenEntity update = appointmentService.updateAppointment(appointmentEntity, id);
+   AppointmentEntity update = appointmentService.updateAppointment(appointmentEntity, id);
     return ResponseEntity
-     .status(HttpStatus.UPDATED)
+     .status(HttpStatus.OK)
      .body(update);
   }
 
