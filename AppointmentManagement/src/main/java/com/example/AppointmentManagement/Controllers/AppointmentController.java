@@ -54,4 +54,12 @@ public class AppointmentController{
      .body(update);
   }
 
+  @DeleteMapping("/delete-appointment/{id}")
+  public ResponseEntity<void> deleteAppointment(@PathaVariable UUID id){
+    appointmentService.deleteAppointment(id);
+    return ResponseEntity
+      .noContent()
+      .build();
+  }
+
 }
