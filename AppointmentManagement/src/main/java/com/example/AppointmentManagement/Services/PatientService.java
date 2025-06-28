@@ -21,14 +21,15 @@ public class PatientService {
             .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + patientId));
 }
 
-   
-
 
 public PatientEntity createPatient(PatientEntity patientEntity){
 if (patientEntity == null){
 throw new IllegalArgumentException("empty patient credentials");
 }
-
+String rawPassword = PatientEntity.get(password);
+    String hashedPassword = passwordEncoder.encode(rawPassword);
+    patientEntity.setPassword(hashedPassword);
+    
 return patientRepository.save(patientEntity);
 }
 
@@ -42,9 +43,6 @@ public PatientDTO deletePatient(UUID patientId) {
     return patientMapper.toDTO(patient); 
 }
 
-
-public PatientEntity updatePatient(PatientEntity patientEntity, UUID patientId){
-PatientEntity patient = patientRepository.findById(patientId).orElseThrow(new RuntineException("patient not found"));
 
 public PatientEntity updatePatient(PatientEntity updatedData, UUID patientId) {
     PatientEntity existingPatient = patientRepository.findById(patientId)
