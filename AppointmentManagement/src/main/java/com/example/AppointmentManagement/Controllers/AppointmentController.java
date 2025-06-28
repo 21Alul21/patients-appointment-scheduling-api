@@ -5,9 +5,11 @@ public class AppointmentController{
 
   private final AppointmentService appointmentService;
   private final NotificationService notificationService;
+  private final DoctorRepository doctorRepository;
   public AppointmentController(AppointmentService appointmentService, NotificationService notificationService){
   this.appointmentService = appointmentService;
   this.notificationService = notificationService;
+  this.doctorRepository = doctorRepository;
   }
 
   @PostMapping("/create-appointment")
@@ -23,6 +25,7 @@ public class AppointmentController{
    notificationEntity.setSentAt(LocalDateTime.now());
    notificationEntity.setIsRead(false);
    notificationEntity.setStatus("PENDING");
+   notificationEntity.setDoctor(doctor);
    notificationService.createNotification(notificationEntity);
     return ResponseEntity
     .status(HttpStatus.CREATED)
