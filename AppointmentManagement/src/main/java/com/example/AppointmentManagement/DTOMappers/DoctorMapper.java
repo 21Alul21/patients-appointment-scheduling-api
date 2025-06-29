@@ -1,5 +1,8 @@
+
+@Component
 public class DoctorMapper {
 
+    @Bean 
     public DoctorDTO toDTO(DoctorEntity doctorEntity) {
         if (doctorEntity == null) {
             return null;
