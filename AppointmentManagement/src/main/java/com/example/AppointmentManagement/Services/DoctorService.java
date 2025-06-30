@@ -19,11 +19,27 @@ public class DoctorService{
 
   public List<DoctorDTO> getDoctors(){
     List<DoctorEntity> doctors = doctorService.findAll();
-    if (doctors.isEmpty){
+    if (doctors.isEmpty()){
       throw new DoctorsNotFoundException("doctors not found");
     }
       return
       .map(doctorMapper::toDTO)
       .collect(Collectors.toList())
   }
-}
+
+  public DoctorEntity createDoctor(DoctorEntity doctorEntity){
+   if (doctorEntity == null){
+     throw new IllegalArgumentException("doctor fields has to contain valid credentials");
+   }
+    return doctorRepository.save(doctorEntity);
+  }
+
+  public DoctorEntity updateDoctor(DoctorEntity doctorEntity, UUID doctorId){
+   if (doctorEntity == null){
+     throw new IllegalArgumentException("doctor fields has to contain valid credentials to update record");
+   }
+    DoctorEntity doctor = doctorRepository
+      .findById(doctorId)
+      .orElseThrow(() -> new DoctorNotFoundException("cannot update doctor entity with id: " + doctorId);
+      doctor.set(doctorEntity.get()) 
+  }
