@@ -40,6 +40,18 @@ public class DoctorService{
    }
     DoctorEntity doctor = doctorRepository
       .findById(doctorId)
-      .orElseThrow(() -> new DoctorNotFoundException("cannot update doctor entity with id: " + doctorId);
-      doctor.set(doctorEntity.get()) 
+      .orElseThrow(() -> new DoctorNotFoundException("cannot update doctor entity with id: " + doctorId); 
+      doctor.setFirstName(doctorEntity.getFirstName());
+      doctor.setLastName(doctorEntity.getLastName());
+      doctor.setAge(doctorEntity.getAge());
+      doctor.setEmail(doctorEntity.getEmail());
+   return doctor;
   }
+
+  public void deleteDoctor(UUID doctorId){
+    doctorRepository.deleteById(doctorId)
+      .orElseThrow(() -> new DoctorNotFoundException("cannot delete doct record at Id: " + doctorId));
+  }
+
+}
+  
