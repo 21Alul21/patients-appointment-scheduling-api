@@ -1,4 +1,4 @@
-public class AppointmentIsEmptyException{
+public class AppointmentIsEmptyException extends RuntimeException{
    public AppointmentIsEmptyException(String message){
     super(message);
    }
