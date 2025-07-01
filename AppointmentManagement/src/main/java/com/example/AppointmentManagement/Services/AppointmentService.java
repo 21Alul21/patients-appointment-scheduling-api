@@ -8,10 +8,12 @@ public class AppointmentService{
   this.appointmentRepository = appointmentRepository;
   }
 
+  // GET all appointments
   public List<AppointmentEntity> getAppointments(){
     return appointmentRepository.findAll();
   }
 
+ // GET an appointment 
   public AppointmentEntity getAppointment(UUID appointmentId){
    return appointmentRepository
      .findById(appointmentId)
@@ -43,9 +45,11 @@ public class AppointmentService{
         return appointmentRepository.save(existingAppointment);
     }
 
+  // DELETE appointment
   public void deleteAppointment(Long appointmentId){
-   AppointmentEntity appontment = appointmentRepository
-     .findById.orElseThrow(() -> new AppointmentNotFoundException("cannot find the appointment to delete"));
+   AppointmentEntity appointment = appointmentRepository
+     .findById(appointmentId)
+     .orElseThrow(() -> new AppointmentNotFoundException("cannot find the appointment to delete"));
     appointmentRepository.deletebyId(appointmentId);
   }
 
