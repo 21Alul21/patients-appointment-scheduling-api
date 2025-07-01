@@ -26,6 +26,7 @@ public class DoctorService{
     }
       return
       doctorRepository
+      .stream()
       .findAll()
       .map(doctorMapper::toDTO)
       .collect(Collectors.toList())
