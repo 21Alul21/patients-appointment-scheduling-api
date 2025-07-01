@@ -46,7 +46,7 @@ public class AppointmentService{
     }
 
   // DELETE appointment
-  public void deleteAppointment(Long appointmentId){
+  public void deleteAppointment(UUID appointmentId){
    AppointmentEntity appointment = appointmentRepository
      .findById(appointmentId)
      .orElseThrow(() -> new AppointmentNotFoundException("cannot find the appointment to delete"));
