@@ -24,5 +24,17 @@ public class AppointmentService{
    }
   return appointmentRepository.save(appointmentEntity);
   }
-  
+
+  public AppointmentEntity updateAppointment(AppointmentEntity appointmentEntity, UUID appointmentId){
+   if (appointmentEntity == null){
+     throw new AppointmentIsEmptyException("cannot update appointment with empty data fields");
+   }
+    AppointmentEntity existingAppointment = appointmentRepisitory
+      .findById(appointmentId)
+      .orElseThrow(() -> new AppointmentNotFoundException("cannot find appointment record to update"));
+      existingAppointment.set(appointmentEntity.get(appointmentStatus));
+      existingAppointment.set(appointmentEntity.get(appointmentDueDate));
+      appointmentRepository.save(existingAppointment);
+  }
+
 }
