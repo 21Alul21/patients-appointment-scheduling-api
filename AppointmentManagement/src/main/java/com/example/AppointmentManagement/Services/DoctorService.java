@@ -20,7 +20,7 @@ public class DoctorService{
   public List<DoctorDTO> getDoctors(){
     List<DoctorEntity> doctors = doctorService.findAll();
     if (doctors.isEmpty()){
-      throw new DoctorsNotFoundException("doctors not found");
+      throw new DoctorNotFoundException("doctors not found");
     }
       return
       .map(doctorMapper::toDTO)
@@ -52,9 +52,9 @@ public class DoctorService{
 
   public void deleteDoctor(UUID doctorId){
     DoctorEntity doctor = doctorRepository.findById(doctorId)
-      .orElseThrow(() -> new DoctorNotFoundException("cannot delete doct record at Id: " + doctorId));
+      .orElseThrow(() -> new DoctorNotFoundException("cannot delete doctor record at Id: " + doctorId));
  
-  doctor.deleteById(doctorId);
+  doctorRepository.deleteById(doctorId);
   }
 
 }
