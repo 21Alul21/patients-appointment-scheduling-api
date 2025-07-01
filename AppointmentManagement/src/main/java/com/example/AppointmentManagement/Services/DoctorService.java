@@ -10,6 +10,7 @@ public class DoctorService{
   this.doctorMapper = doctorMapper;
   }
 
+  // GET a doctor
   public DoctorDTO getDoctor(UUID doctorId){
    DoctorEntity doctor = doctorRepository
      .findById(doctorId)
@@ -17,16 +18,20 @@ public class DoctorService{
     return doctorMapper.toDTO(doctor);
   }
 
+  // GET doctors
   public List<DoctorDTO> getDoctors(){
     List<DoctorEntity> doctors = doctorService.findAll();
     if (doctors.isEmpty()){
       throw new DoctorNotFoundException("doctors not found");
     }
       return
+      doctorRepository
+      .findAll()
       .map(doctorMapper::toDTO)
       .collect(Collectors.toList())
   }
 
+  // CREATE doctor record
   public DoctorEntity createDoctor(DoctorEntity doctorEntity){
    if (doctorEntity == null){
      throw new IllegalArgumentException("doctor fields has to contain valid credentials");
@@ -34,6 +39,7 @@ public class DoctorService{
     return doctorRepository.save(doctorEntity);
   }
 
+  // UPDATE doctor record
   public DoctorEntity updateDoctor(DoctorEntity doctorEntity, UUID doctorId){
    if (doctorEntity == null){
      throw new IllegalArgumentException("doctor fields has to contain valid credentials to update record");
@@ -46,11 +52,11 @@ public class DoctorService{
       doctor.setAge(doctorEntity.getAge());
       doctor.setEmail(doctorEntity.getEmail());
      doctorRepository.save(public DoctorEntity updateDoctor(DoctorEntity doctorEntity, UUID doctorId){
-    return doctorRepository.save(doctor);
-   
+    return doctorRepository.save(doctor);   
   }
 
-  public void deleteDoctor(UUID doctorId){
+   // DELETE doctor record
+    public void deleteDoctor(UUID doctorId){
     DoctorEntity doctor = doctorRepository.findById(doctorId)
       .orElseThrow(() -> new DoctorNotFoundException("cannot delete doctor record at Id: " + doctorId));
  
