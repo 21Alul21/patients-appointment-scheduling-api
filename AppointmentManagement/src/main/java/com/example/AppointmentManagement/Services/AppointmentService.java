@@ -9,7 +9,20 @@ public class AppointmentService{
   }
 
   public List<AppointmentEntity> getAppointments(){
-    return appointmentRepository.findAll()
-      .orElseThrow(() -> new AppointmentNotFoundException("no appointments were found"));
+    return appointmentRepository.findAll();
   }
+
+  public AppointmentEntity getAppointment(UUID appointmentId){
+   return appointmentRepository
+     .findById(appointmentId)
+     .orElseThrow(() -> new AppointmentNotFoundException("no appointment was found at id: " + appointmentId));
+  }
+
+  public AppointmentEntity createAppointment(AppointmentEntiry appointmentEntity){
+   if (appointmentEntity == null){
+     throw new AppointmentIsEmptyException("you cannot create an empty appointment");
+   }
+  return appointmentRepository.save(appointmentEntity);
+  }
+  
 }
