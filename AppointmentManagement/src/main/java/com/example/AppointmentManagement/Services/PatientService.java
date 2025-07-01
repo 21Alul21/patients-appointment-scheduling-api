@@ -3,6 +3,12 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final PatientMapper patientMapper;
 
+    public PatientService(PatientRepository patientRepository, PatientMapper patientMapper){
+      this.patientRepository = patientRepository;
+      this.patientMapper = patientMapper;
+    }
+
+    // GET all patients 
     public List<PatientDTO> getPatients() {
         return patientRepository.findAll()
                 .stream()
@@ -10,13 +16,15 @@ public class PatientService {
                 .collect(Collectors.toList());
     }
 
+    // GET one patient
     public PatientDTO getPatient(UUID patientId) {
     return patientRepository.findById(patientId)
+            .stream()
             .map(patientMapper::toDTO)
-            .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + patientId));
+            .orElseThrow(() -> new PatientNotFoundException("Patient not found with ID: " + patientId));
 }
 
-
+// CREATE patient
 public PatientEntity createPatient(PatientEntity patientEntity){
 if (patientEntity == null){
 throw new IllegalArgumentException("empty patient credentials");
@@ -28,7 +36,7 @@ String rawPassword = PatientEntity.get(password);
 return patientRepository.save(patientEntity);
 }
 
-
+// DELETE patient
 public PatientDTO deletePatient(UUID patientId) {
     PatientEntity patient = patientRepository.findById(patientId)
         .orElseThrow(() -> new RuntimeException("No patient found with ID: " + patientId));
@@ -38,10 +46,10 @@ public PatientDTO deletePatient(UUID patientId) {
     return patientMapper.toDTO(patient); 
 }
 
-
+// UPDATE patient
 public PatientEntity updatePatient(PatientEntity updatedData, UUID patientId) {
     PatientEntity existingPatient = patientRepository.findById(patientId)
-            .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + patientId));
+            .orElseThrow(() -> new PatientNotFoundException("Patient not found with ID: " + patientId));
 
     // Update fields
     existingPatient.setFirstName(updatedData.getFirstName());
@@ -56,4 +64,4 @@ public PatientEntity updatePatient(PatientEntity updatedData, UUID patientId) {
 
 } 
 
-}
+
