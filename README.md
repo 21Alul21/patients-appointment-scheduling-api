@@ -27,6 +27,6 @@ MedManage is a Spring Boot REST API for managing healthcare organizations, by pr
 
 ## 🛠 Setup Instructions
 ```bash
-git clone https://github.com/your-username/medmanage-api.git
+clone this git repository and 
 cd AppointmentManagement
 ./mvnw spring-boot:run
