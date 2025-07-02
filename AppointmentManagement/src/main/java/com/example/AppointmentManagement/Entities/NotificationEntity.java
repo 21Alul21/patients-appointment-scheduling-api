@@ -25,4 +25,10 @@ public class NotificationEntity{
   @JoinColumn(name = "patient_recepient_id")
   Private PatientEntity patientEntity;
 
+ 
+    @ManyToOne
+    @JoinColumn(name = "organization_id");
+    OrganizationEntity organization;  
+ 
+
 }
