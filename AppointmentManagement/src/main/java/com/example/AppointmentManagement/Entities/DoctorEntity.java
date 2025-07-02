@@ -30,6 +30,11 @@ public class DoctorEntity{
     @OneToMany(mappedBy = "doctorEntity", cascade = Cascade.Type.All, orphanRemoval = true)
     private List<DoctorAvailability> doctorAvailability = new ArrayList<>();
 
-    @OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "doctorEntitye", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NotificationEntity> notificationEntity = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "organization_id");
+    OrganizationEntity organization;  
+ 
 }
