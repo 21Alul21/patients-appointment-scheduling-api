@@ -32,6 +32,11 @@ public class AppointmentEntity {
     private PatientEntity patientEntity;
 
     @ManyToOne
+    @JoinColumn(name = "organization_id");
+    OrganizationEntity organization;  
+  
+
+    @ManyToOne
     @JoinColumn(name = "doctor_id")
     private DoctorEntity doctor;
 }
