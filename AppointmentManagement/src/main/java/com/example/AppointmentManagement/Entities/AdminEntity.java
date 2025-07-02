@@ -14,4 +14,7 @@ public class AdminEntity{
     private LocalDateTime dateAccountCreated;
     private String role;
 
+    @ManyToOne
+    @JoinColumn(name = "organization_id");
+    OrganizationEntity organization;  
 }
