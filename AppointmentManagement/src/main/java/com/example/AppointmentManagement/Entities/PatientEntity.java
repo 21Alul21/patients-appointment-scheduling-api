@@ -34,7 +34,7 @@ public class PatientEntity{
     private List<NotificationEntity> notification
     
     @ManyToOne
-    @JoinColumn(name = "patiend_id");
+    @JoinColumn(name = "organization_id");
     OrganizationEntity organization;  
-
+ 
 }
