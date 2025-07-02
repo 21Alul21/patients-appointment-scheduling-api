@@ -37,6 +37,10 @@ public class DoctorService{
    if (doctorEntity == null){
      throw new IllegalArgumentException("doctor fields has to contain valid credentials");
    }
+    String rawPassword = doctorEntity.getPassword();
+    String hashedPassword = passwordEncoder.encode(rawPassword);
+    doctorEntity.setPassword(hashedPassword);
+    
     return doctorRepository.save(doctorEntity);
   }
 
