@@ -26,10 +26,15 @@ public class PatientEntity{
     private String email;
     private LocalDateTime registeredAt;
 
-    @OneToMany(mappedBy = "personEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<NotificationEntity> notificationEntity = new ArralList<>();  
     
     @OneToMany(mappedBy = "patientEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AppointmentEntity> appointmentEntity = new ArrayList<>();
+    private List<AppointmentEntity> appointment
+
+    @OneToMany(mappedBy = "patientEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<NotificationEntity> notification
+    
+    @ManyToOne
+    @JoinColumn(name = "patiend_id");
+    OrganizationEntity organization;  
 
 }
