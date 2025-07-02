@@ -2,10 +2,12 @@
 public class PatientService {
     private final PatientRepository patientRepository;
     private final PatientMapper patientMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public PatientService(PatientRepository patientRepository, PatientMapper patientMapper){
+    public PatientService(PatientRepository patientRepository, PatientMapper patientMapper, PasswordEncoder passwordEncoder){
       this.patientRepository = patientRepository;
       this.patientMapper = patientMapper;
+       this.passwordEncoder = passwordEncoder;
     }
 
     // GET all patients 
@@ -29,7 +31,7 @@ public PatientEntity createPatient(PatientEntity patientEntity){
 if (patientEntity == null){
 throw new IllegalArgumentException("empty patient credentials");
 }
-String rawPassword = PatientEntity.get(password);
+String rawPassword = patientEntity.getPassword();
     String hashedPassword = passwordEncoder.encode(rawPassword);
     patientEntity.setPassword(hashedPassword);
     
