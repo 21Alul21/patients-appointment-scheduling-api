@@ -1,30 +1,36 @@
-
 @RestControllerAdvice
-public class GlobalExceptionHandler{
- @ExceptionHandler(AppointmentNotFoundException.class)
- public ResponseEntity<?> handleAppointmentNotFound(AppointmentNotFoundException ex){
-   return new ResponseEntity<>(createErrorBody(ex.getMessage()), HttpSatus.BAD_REQUEST)
- }
+public class GlobalExceptionHandler {
 
- @ExceptionHandler(DoctorNotFoundException.class)
- public ResponseEntity<?> handleDoctorNotFound(DoctorNotFoundException ex){
-   return new ResponseEntity<>(createErrorBody(ex.getMessage()), HttpStatus.BAD_REQUEST);
- }
+    @ExceptionHandler(AppointmentNotFoundException.class)
+    public ResponseEntity<?> handleAppointmentNotFound(AppointmentNotFoundException ex) {
+        return new ResponseEntity<>(createErrorBody(ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
 
- @ExceptionHandler(PatientNotFoundException.class)
- public ResponseEntity<?> handlePatientNotFound(PatientNotFoundException ex){
-   return new ResponseEntity<>(createdErrorBody(ex.getMessage()), HttpStatus.BAD_REQUEST);
- }
+    @ExceptionHandler(DoctorNotFoundException.class)
+    public ResponseEntity<?> handleDoctorNotFound(DoctorNotFoundException ex) {
+        return new ResponseEntity<>(createErrorBody(ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
 
- @ExceptionHandler(AppointmentIsEmptyException.class)
- public ResponseEntity<?> handle appointmentIsEmpty(AppointmentIsEmptyException ex){
-  return new ResponseEntity<>(createErrorBody(ex.getMessage()), HttpStatus.BAD_REQUEST); 
- }
+    @ExceptionHandler(PatientNotFoundException.class)
+    public ResponseEntity<?> handlePatientNotFound(PatientNotFoundException ex) {
+        return new ResponseEntity<>(createErrorBody(ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
 
-  @ExceptionHandler(RuntimeException.class)
- public ResponseEntity<?> handleAppointmentNotFound(RuntimeException ex){
-    return new ResponseEntity<>(createErrorBody("a runtime exception has occured", HttpStatus.BAD_REQUEST);
-  }
- 
+    @ExceptionHandler(AppointmentIsEmptyException.class)
+    public ResponseEntity<?> handleAppointmentIsEmpty(AppointmentIsEmptyException ex) {
+        return new ResponseEntity<>(createErrorBody(ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> handleRuntimeException(RuntimeException ex) {
+        return new ResponseEntity<>(createErrorBody("A runtime exception has occurred"), HttpStatus.BAD_REQUEST);
+    }
+
+    // Helper method to build error response body
+    private Map<String, Object> createErrorBody(String message) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("error", message);
+        return body;
+    }
 }
-  
