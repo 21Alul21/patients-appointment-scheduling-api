@@ -14,4 +14,10 @@
 
     @Enumerate(EnumType.STRING)
     private RoleEnum role;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.All, orphanRemoval = true)
+    private DoctorEntity doctorEntity;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.All, orphanRemoval = true)
+    private PatientEntity patientEntity;
   }
