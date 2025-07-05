@@ -17,4 +17,8 @@ public class AdminEntity{
     @ManyToOne
     @JoinColumn(name = "organization_id");
     OrganizationEntity organization;  
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
 }
