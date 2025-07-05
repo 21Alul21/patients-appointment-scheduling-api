@@ -13,7 +13,6 @@ public class PatientEntity{
     @NotBlank(message = "last name cannot be blank")
     private String lastNmame;
     @Size(min = 5, message = "length of password should be gretater than {min}")
-    private String Password;
     private LocalDate dateOfBirth;
     private String phoneNumber;
     private String gender;
@@ -22,8 +21,6 @@ public class PatientEntity{
     private String idNumber;
     private String insuranceProvider;
     private String insuranceNumber;
-    @Email(message = "Please Enter a valid email address")
-    private String email;
     private LocalDateTime registeredAt;
 
     
