@@ -7,5 +7,11 @@
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID userId;
-    private 
+    @Email(message = "enter valid email address")
+    @NotNull(message = "email cannot be blank")
+    private String email;
+    private String password
+
+    @Enumerate(EnumType.STRING)
+    private RoleEnum role;
   }
