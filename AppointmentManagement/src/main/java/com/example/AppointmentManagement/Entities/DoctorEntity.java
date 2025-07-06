@@ -13,13 +13,11 @@ public class DoctorEntity{
     @NotBlank(message = "last name cannot be blank")
     private String lastNmame;
     @Size(min = 5, message = "length of password should be gretater than {min}")
-    private String Password;
     private LocalDate dateOfBirth;
     private String phoneNumber;
     private String meansOfIdentification;
     private String idNumber;
-    @Email(message = "please enter a valid email address")
-    private String email;
+    
     @Enumerated(EnumType.STRING)
     private SpecializationEnum specialization;
     private LocalDateTime registeredAt;
