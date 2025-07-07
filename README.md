@@ -18,14 +18,14 @@ MedManage is a Spring Boot REST API for managing healthcare organizations, by pr
 - JWT Auth
 - WebSocket
 
-## 🔧 Features (In Progress)
+## Features (In Progress)
 - [x] Create and manage organizations
 - [x] Admin login per organization
 - [x] Register doctors and patients
 - [x] Book and manage appointments
 - [ ] Notifications via WebSocket (coming soon)
 
-## 🛠 Setup Instructions
+## Setup Instructions
 ```bash
 clone this git repository and 
 cd AppointmentManagement
