@@ -10,16 +10,16 @@ public class AuthController{
     if (registerDTO == null){
        throw new IllegalArgumentException("Registration fields cannot be empty");
     }
-    if ((registerDTO.getRole).toUppercase == "ADMIN"){
+    if (registerDTO.getRole().equalsIgnoreCase("ADMIN")){
        throw new IllegalArgumentException("you cannot register as an admin");
     }
 
     UserEntity userEntity = new UserEntity();
 
-    userEntity.setId(registerDTO.getId);
-    userEntity.setEmail(registerDTO.getEmail);
-    userEntity.setPassword(passwordEncoder.encode(registerDTO.getId));
-    userEntity.setRole(RoleEntity.valueOf(registerDTO.getRole.toUppercase));
+    userEntity.setId(registerDTO.getId());
+    userEntity.setEmail(registerDTO.getEmail());
+    userEntity.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+    userEntity.setRole(RoleEnum.valueOf(registerDTO.getRole().toUpperCase()));
     userRepository.save(userEntity);
 
     return ResponseEntity
