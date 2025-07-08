@@ -20,5 +20,11 @@ Public class EnumClass{
         CANCELED
     }
 
+  public enum RoleEnum{
+      ADMIN,
+      DOCTOR,
+      PATIENT
+  }
+
   
 }
