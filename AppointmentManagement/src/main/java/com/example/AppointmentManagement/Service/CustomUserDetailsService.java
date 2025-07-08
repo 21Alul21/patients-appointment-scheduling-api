@@ -1,0 +1,6 @@
+
+@Service
+
+piblic class CustomUserDetailsService{
+  
+}
