@@ -1,4 +1,9 @@
 @RestController
 @RequestMapping("api/v1/auth")
-public AuthController{
+public class AuthController{
+
+  @PostMapping("/register")
+  public ResponseEntity<?> registerUser(@RequestMapping RegisterDTO registerDTO){
+ 
+  }
 }
