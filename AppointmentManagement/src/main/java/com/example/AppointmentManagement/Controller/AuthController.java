@@ -1,6 +1,9 @@
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("api/v1/auth")
 public class AuthController{
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
   @PostMapping("/register")
   public ResponseEntity<UserEntity> registerUser(@RequestBody RegisterDTO registerDTO){
@@ -17,6 +20,7 @@ public class AuthController{
     userEntity.setEmail(registerDTO.getEmail);
     userEntity.setPassword(passwordEncoder.encode(registerDTO.getId));
     userEntity.setRole(RoleEntity.valueOf(registerDTO.getRole.toUppercase));
+    userRepository.save(userEntity);
 
     return ResponseEntity
       .status(HttpStatus.CREATED);
