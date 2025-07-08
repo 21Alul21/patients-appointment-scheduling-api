@@ -23,11 +23,14 @@ public class AuthController{
     userRepository.save(userEntity);
 
     return ResponseEntity
-      .status(HttpStatus.CREATED);
+      .status(HttpStatus.CREATED)
       .body(userEntity);
+
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO){
        
     }
+
 }
