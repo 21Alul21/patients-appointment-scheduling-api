@@ -28,9 +28,16 @@ public class AuthController{
 
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO){
-       
+    PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
+        );
+
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername(loginDTO.getEmail());
+        String token = jwtUtil.generateToken(userDetails);
+
+        return ResponseEntity.ok(Map.of("token", token));
     }
 
 }
