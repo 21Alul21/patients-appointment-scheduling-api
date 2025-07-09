@@ -13,13 +13,12 @@ public class OrganizationEntity {
     @Enumerated(EnumType.STRING)
     private SubscriptionStatus subscriptionStatus;
 
+    private int subscriptionDurationLeft;
+
     private LocalDateTime registeredAt;
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
-    private List<DoctorEntity> doctors;
-
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
-    private List<PatientEntity> patients;
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.All)
+    private List<UserEntity> userEntity;
 
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
     private List<AppointmentEntity> appointments;
