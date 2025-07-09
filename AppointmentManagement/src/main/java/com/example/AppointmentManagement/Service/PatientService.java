@@ -21,7 +21,10 @@ public class PatientService {
 
     // GET all patients in a particular organization where the orgAdmin belong
     public List<UserEntity> getOrgUsers(UUID orgId){
-      
+      if (orgId == null){
+          throw new IllegalArgumentException("organizationId not found");
+      }
+       return userRepository.findAllByOrganizationId(orgId);
     }
 
     // GET one patient
