@@ -17,13 +17,6 @@ public class DoctorController{
     return ResponseEntity.ok(doctorService.getDoctors());
   }
 
-  @PostMapping("/register-doctor")
-  public ResponseEntity<DoctorEntity> registerDoctor(@RequestBody DoctorEntity doctorEntity){
-    return ResponseEntity
-      .status(HttpStatus.CREATED)
-      .body(doctorService.createDoctor(doctorEntity));
-  }
-
   @PatchMapping("/update-profile/{doctorId}")
   public ResponseEntity<DoctorEntity> updateDoctor(@RequestBody DoctorEntity doctorEntity, @PathVariable UUID doctorId){
    return ResponseEntity.ok(doctorService.updateDoctor(doctorEntity, doctorId));
