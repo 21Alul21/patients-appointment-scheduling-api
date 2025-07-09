@@ -30,7 +30,7 @@ public class AuthController {
         }
 
         if (userEntity.getRole().equalsIgnoreCase("DOCTOR")){
-            userEntity.getPatient().setUserEntity(userEntity);
+            userEntity.getDoctor().setUserEntity(userEntity);
         }
       
         userEntity.get
