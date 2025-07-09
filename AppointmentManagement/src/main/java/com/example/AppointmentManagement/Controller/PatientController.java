@@ -18,13 +18,6 @@ public class PatientController {
     return ResponseEntity.ok(patientService.getPatients());
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<PatientEntity> createPatient(@Valid @RequestBody PatientEntity patientEntity){
-    return ResponseEntity
-    .status(HttpStatus.CREATED)
-    .body(patientService.createPatient(patientEntity));
-    }
-
     @PatchMapping("/update-profile/{patientId}")
     public ResponseEntity<PatientEntity> updatePatientProfile(@Valid @RequestBody PatientEntity patientEntity, @PathVariable UUID patientId){
     return ResponseEntity.ok(patientService.updatePatient(patientEntity, patientId));
