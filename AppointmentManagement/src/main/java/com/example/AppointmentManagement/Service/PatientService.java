@@ -10,12 +10,18 @@ public class PatientService {
        this.passwordEncoder = passwordEncoder;
     }
 
-    // GET all patients 
+    // GET all patients accross organizations by SUPERADMIN
     public List<PatientDTO> getPatients() {
         return patientRepository.findAll()
                 .stream()
                 .map(patientMapper::toDTO)
                 .collect(Collectors.toList());
+        
+    }
+
+    // GET all patients in a particular organization where the orgAdmin belong
+    public List<UserEntity> getOrgUsers(UUID orgId){
+      
     }
 
     // GET one patient
@@ -25,7 +31,7 @@ public class PatientService {
             .map(patientMapper::toDTO)
             .orElseThrow(() -> new PatientNotFoundException("Patient not found with ID: " + patientId));
 }
-
+/*
 // CREATE patient
 public PatientEntity createPatient(PatientEntity patientEntity){
 if (patientEntity == null){
@@ -37,6 +43,7 @@ String rawPassword = patientEntity.getPassword();
     
 return patientRepository.save(patientEntity);
 }
+*/
 
 // DELETE patient
 public PatientDTO deletePatient(UUID patientId) {
