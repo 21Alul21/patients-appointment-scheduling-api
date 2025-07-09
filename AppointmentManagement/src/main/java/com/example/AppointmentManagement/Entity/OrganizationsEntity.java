@@ -18,7 +18,7 @@ public class OrganizationEntity {
     private LocalDateTime registeredAt;
 
     @OneToMany(mappedBy = "organization", cascade = CascadeType.All)
-    private List<UserEntity> userEntity;
+    private List<UserEntity> users;
 
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
     private List<AppointmentEntity> appointments;
