@@ -13,33 +13,15 @@ public class AuthController {
     public ResponseEntity<UserEntity> registerUser(@RequestBody RegisterDTO registerDTO) {
         if (registerDTO == null) {
             throw new IllegalArgumentException("Registration fields cannot be empty");
-        }
-
-        if (registerDTO.getRole().equalsIgnoreCase("ADMIN")) {
-            throw new IllegalArgumentException("You cannot register as an admin");
-        }
-
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(registerDTO.getId());
-        userEntity.setEmail(registerDTO.getEmail());
-        userEntity.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-        userEntity.setRole(RoleEnum.valueOf(registerDTO.getRole().toUpperCase()));
-
-        // Establish bi-directional relationship
-    if (userEntity.getRole() == RoleEnum.PATIENT) {
-        PatientEntity patient = new PatientEntity();
-        patient.setUser(userEntity);       
-        userEntity.setPatient(patient);    
+            user = registerUser(registerDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
-    if (userEntity.getRole() == RoleEnum.DOCTOR) {
-        DoctorEntity doctor = new DoctorEntity();
-        doctor.setUser(userEntity);
-        userEntity.setDoctor(doctor);
-    }
-        userRepository.save(userEntity);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(userEntity);
+    @PostMapping("/registerOrgAdmin")
+    public ResponseEntity<> registerOrgAdmin(@RequestBody RegisterDTO registerDTO, @RequestParameter String orgName){
+        orgAdmin = registerOrgAdmin(registerDTO, orgName);
+        return ResponseEntity.status(HttpStatus.CREATED)
+             .body(orgAdmin);                      
     }
 
     @PostMapping("/login")
