@@ -4,7 +4,7 @@ This project is licensed under the [MIT License](./LICENSE).
 # MedManage API – Multi-Tenant Medical Management System
 
 ## Project Description
-MedManage is a Spring Boot REST API for managing healthcare organizations, by providing an efficient solution for creating and manging appointments between patients and doctors — with multi-organization (tenant) support.
+MedManage is a Spring Boot REST API for managing healthcare organizations. It provides a subscription based system, enabling subcribed organizations to effectively create, shedule and manage appointments between patients and doctors — with multi-organization (tenant) support. It contains a trial organizations to test the application before choosing to pay for a subscription. 
 
 ## Project Status
 **In development** – key features are being implemented.
@@ -23,6 +23,7 @@ MedManage is a Spring Boot REST API for managing healthcare organizations, by pr
 - [x] Admin login per organization
 - [x] Register doctors and patients
 - [x] Book and manage appointments
+- [ ] Subscription payment through the organization admin
 - [ ] Notifications via WebSocket (coming soon)
 
 ## Setup Instructions
