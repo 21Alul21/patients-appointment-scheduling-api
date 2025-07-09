@@ -36,4 +36,18 @@ public class UserService {
 
         return userRepository.save(user); 
     }
+
+    public UserEntity registerAdmin(RegisterDTO registerDTO){
+         if (registerDTO == null){
+             throw new IllegalArgumentException("fields for registering admin cannot be empty");
+         }
+
+        OrganizationEntity organization = new Organization();
+        
+        UserEntity user = new UserEntity();
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));  // Secure password
+        user.setRole(RoleEnum.valueOf(registerDTO.getRole().toUpperCase()));
+        user.setOrganization(organization);  
+    }
 }
