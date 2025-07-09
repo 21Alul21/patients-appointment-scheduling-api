@@ -12,7 +12,26 @@ public class UserService{
   UserEntity user = new UserEntity();
   user.setEmail(registerDTO.getEmail());
   user.setPassword(registerDTO.getPassward());
-  user.setRole(registerDTO.getRole());
+  user.setRole(registerDTO.getRole().toUppercase());
+
 
  // bi-directional relationship assignment 
+ if (user.getRole() == RoleEnum.PATIENT) {
+        PatientEntity patient = new PatientEntity();
+        patient.setUser(userEntity);       
+        user.setPatient(patient);    
+    }
+
+    if (user.getRole() == RoleEnum.DOCTOR) {
+        DoctorEntity doctor = new DoctorEntity();
+        doctor.setUser(user);
+        user.setDoctor(doctor);
+    }
+
+    organization.setUser(user);
+        userRepository.save(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
 }
