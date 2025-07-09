@@ -3,7 +3,8 @@ Public class EnumClass{
     GYNECOLOGIST,
     DENTIST,
     OPTICIAN,
-    GENERAL_MEDICAL_SERVICES
+    GENERAL_MEDICAL_SERVICES,
+    OTHER
 }
 
   public enum AppointmentStatusEnum {
@@ -21,7 +22,8 @@ Public class EnumClass{
     }
 
   public enum RoleEnum{
-      ADMIN,
+      SUPERADMIN,
+      ORGADMIN,
       DOCTOR,
       PATIENT
   }
