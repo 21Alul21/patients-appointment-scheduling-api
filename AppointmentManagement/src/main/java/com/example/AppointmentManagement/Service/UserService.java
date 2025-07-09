@@ -37,17 +37,17 @@ public class UserService {
         return userRepository.save(user); 
     }
 
-    public UserEntity registerAdmin(RegisterDTO registerDTO){
+    public String registerAdmin(RegisterDTO registerDTO, String organizationName){
          if (registerDTO == null){
              throw new IllegalArgumentException("fields for registering admin cannot be empty");
          }
-
+        
         OrganizationEntity organization = new Organization();
+        orgString = organization.setOrganizationId(organizationName + "/" + organization.getOrganizationId());
         
         UserEntity user = new UserEntity();
         user.setEmail(registerDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));  // Secure password
+        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));  
         user.setRole(RoleEnum.valueOf(registerDTO.getRole().toUpperCase()));
-        user.setOrganization(organization);  
-    }
+        return orgString; 
 }
