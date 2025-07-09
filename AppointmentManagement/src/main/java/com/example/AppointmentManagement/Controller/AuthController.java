@@ -25,15 +25,18 @@ public class AuthController {
         userEntity.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         userEntity.setRole(RoleEnum.valueOf(registerDTO.getRole().toUpperCase()));
 
-        if (userEntity.getRole().equalsIgnoreCase("PATIENT")){
-            userEntity.getPatient().setUserEntity(userEntity);
-        }
+        // Establish bi-directional relationship
+    if (userEntity.getRole() == RoleEnum.PATIENT) {
+        PatientEntity patient = new PatientEntity();
+        patient.setUser(userEntity);       
+        userEntity.setPatient(patient);    
+    }
 
-        if (userEntity.getRole().equalsIgnoreCase("DOCTOR")){
-            userEntity.getDoctor().setUserEntity(userEntity);
-        }
-      
-        userEntity.get
+    if (userEntity.getRole() == RoleEnum.DOCTOR) {
+        DoctorEntity doctor = new DoctorEntity();
+        doctor.setUser(userEntity);
+        userEntity.setDoctor(doctor);
+    }
         userRepository.save(userEntity);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userEntity);
