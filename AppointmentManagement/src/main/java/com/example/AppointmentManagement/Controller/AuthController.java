@@ -9,20 +9,33 @@ public class AuthController {
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtUtil jwtUtil;
 
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/auth")
+public class AuthController {
+
+    private final UserService userService;
+
     @PostMapping("/register")
     public ResponseEntity<UserEntity> registerUser(@RequestBody RegisterDTO registerDTO) {
         if (registerDTO == null) {
             throw new IllegalArgumentException("Registration fields cannot be empty");
-            user = registerUser(registerDTO);
+        }
+
+        UserEntity user = userService.registerUser(registerDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
     @PostMapping("/registerOrgAdmin")
-    public ResponseEntity<> registerOrgAdmin(@RequestBody RegisterDTO registerDTO, @RequestParameter String orgName){
-        orgAdmin = registerOrgAdmin(registerDTO, orgName);
-        return ResponseEntity.status(HttpStatus.CREATED)
-             .body(orgAdmin);                      
+    public ResponseEntity<UserEntity> registerOrgAdmin(
+            @RequestBody RegisterDTO registerDTO,
+            @RequestParam String orgName) {
+
+        UserEntity orgAdmin = userService.registerOrgAdmin(registerDTO, orgName);
+        return ResponseEntity.status(HttpStatus.CREATED).body(orgAdmin);
     }
+}
+
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
