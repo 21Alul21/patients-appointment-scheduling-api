@@ -20,7 +20,4 @@
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.All, orphanRemoval = true)
     private PatientEntity patientEntity;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.All, orphanRemoval = true)
-    private AdminEntity adminEntity;
   }
