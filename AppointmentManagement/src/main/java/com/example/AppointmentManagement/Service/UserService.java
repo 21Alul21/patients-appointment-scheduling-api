@@ -37,17 +37,37 @@ public class UserService {
         return userRepository.save(user); 
     }
 
-    public String registerAdmin(RegisterDTO registerDTO, String organizationName){
-         if (registerDTO == null){
-             throw new IllegalArgumentException("fields for registering admin cannot be empty");
-         }
-        
-        OrganizationEntity organization = new Organization();
-        orgString = organization.setOrganizationId(organizationName + "/" + organization.getOrganizationId());
-        
-        UserEntity user = new UserEntity();
-        user.setEmail(registerDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));  
-        user.setRole(RoleEnum.valueOf(registerDTO.getRole().toUpperCase()));
-        return orgString; 
+    public UserEntity registerAdmin(RegisterDTO registerDTO, String organizationName) {
+
+    if (registerDTO == null) {
+        throw new IllegalArgumentException("Fields for registering admin cannot be empty");
+    }
+
+    // Step 1: Create new organization and generate a unique org ID
+    OrganizationEntity organization = new OrganizationEntity();
+    String orgId = UUID.randomUUID().toString();  // Or use a better custom generator
+    String uniqueOrgId = organizationName + "/" + orgId;
+
+    organization.setName(organizationName);
+    organization.setOrganizationId(uniqueOrgId);  // Set custom org ID
+
+    // Step 2: Create admin user
+    UserEntity user = new UserEntity();
+    user.setEmail(registerDTO.getEmail());
+    user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+    user.setRole(RoleEnum.ORGADMIN);
+    user.setOrganization(organization);
+
+    // Step 3: Set bi-directional relationship
+    OrgAdminEntity orgAdmin = new OrgAdminEntity();
+    orgAdmin.setUser(user);
+    user.setOrgAdmin(orgAdmin);
+
+    // Step 4: Save organization and user
+    organizationRepository.save(organization);
+    userRepository.save(user);
+
+    return user;
+  }
+
 }
