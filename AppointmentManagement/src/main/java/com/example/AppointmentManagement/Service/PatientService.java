@@ -4,7 +4,7 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final PatientMapper patientMapper;
     private final PasswordEncoder passwordEncoder;
-    private final JwtUtils jwtUtils;
+    private final AuthUtils authUtils;
 
 
     // GET all patients accross organizations by SUPERADMIN
@@ -21,6 +21,10 @@ public class PatientService {
       if (orgId == null){
           throw new IllegalArgumentException("organizationId not found");
       }
+        UserEntiry currentUser = authUtils.getCurrentUser();
+        if (currentUser.getOrganization().getOrganizationId() != orgId){
+           throw new AccessDeniedException("you do not have access to that organization data");
+        }
        return userRepository.findAllByOrganizationId(orgId);
     }
 
