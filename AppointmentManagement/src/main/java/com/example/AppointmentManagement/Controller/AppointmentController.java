@@ -7,6 +7,7 @@ public class AppointmentController{
   private final AppointmentService appointmentService;
   private final NotificationService notificationService;
   private final DoctorRepository doctorRepository;
+  private final AuthUtils authUtils;
   
 
   // crete appointment and notification
@@ -44,10 +45,11 @@ public class AppointmentController{
 
   // get all appointments related to an authenticated user
   @GetMapping("/get-user-appointments")
-  public List<AppointmentEntity> getUserAppointments(){
-    UserEntity currentUser = authenticateUser();
+  public ResponseEntity<List<AppointmentEntity>> getUserAppointments(){
+    UserEntity currentUser = authUtils.getCurrentUser();
     UUID orgId = currentUser.getOrganization().getOrganizationId();
-    return appointmentRepository.findAllByOrganization_organizationIdAndUser_UserId(orgId, currentUser.getUserId());
+    return ResponseEntity
+      .ok(appointmentRepository.findAllByOrganization_organizationIdAndUser_UserId(orgId, currentUser.getUserId()));
   }
 
   // update an appointment 
