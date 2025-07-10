@@ -19,9 +19,9 @@ public class PatientService {
     // GET all patients within the same organization as the current user
 public List<UserEntity> getOrgPatients() {
     UserEntity currentUser = authUtils.getCurrentUser(); // already authenticated
-    UUID orgId = currentUser.getOrganization().getId();
+    UUID orgId = currentUser.getOrganization().getOrganizationId();
 
-    return userRepository.findAllByOrganization_IdAndRole(orgId, RoleEnum.PATIENT);
+    return userRepository.findAllByOrganization_OrganizationIdAndRole(orgId, RoleEnum.PATIENT);
 }
 
 
