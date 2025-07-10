@@ -24,7 +24,7 @@ public class PatientController {
     @GetMapping("/org-patients-list")
     public ResponseEntity<List<PatientDTO>> getOrgPatients(){
       return ResponseEntity
-          .ok(patientService.orgPatients());  
+          .ok(patientService.getOrgPatients());  
     }
 
     // SUPERADMIN can update any patient record across orgs
