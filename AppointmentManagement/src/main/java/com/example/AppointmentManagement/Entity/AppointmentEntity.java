@@ -25,18 +25,15 @@ public class AppointmentEntity {
     private SpecializationEnum specialization;
 
     @OneToMany(mappedBy = "appointmentEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<NotificationEntity> notificationEntity = new ArrayList<>();
+    private List<NotificationEntity> notificationEntity;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
-    private PatientEntity patientEntity;
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "organization_id");
-    OrganizationEntity organization;  
+    private OrganizationEntity organization;  
   
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private DoctorEntity doctor;
 }
