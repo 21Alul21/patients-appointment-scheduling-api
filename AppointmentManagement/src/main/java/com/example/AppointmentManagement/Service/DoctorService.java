@@ -18,7 +18,7 @@ public class DoctorService{
     return doctorMapper.toDTO(doctor);
   }
 
-  // GET doctors
+  // GET ALL doctors across organizations
   public List<DoctorDTO> getDoctors(){
     List<DoctorEntity> doctors = doctorService.findAll();
     if (doctors.isEmpty()){
@@ -31,6 +31,14 @@ public class DoctorService{
       .map(doctorMapper::toDTO)
       .collect(Collectors.toList())
   }
+
+  // GET all doctors within the same organization as the current user
+public List<UserEntity> getOrgPatients() {
+    UserEntity currentUser = authUtils.getCurrentUser(); // already authenticated
+    UUID orgId = currentUser.getOrganization().getOrganizationId();
+
+    return userRepository.findAllByOrganization_OrganizationIdAndRole(orgId, RoleEnum.DOCTOR);
+}
 
   // CREATE doctor record
   public DoctorEntity createDoctor(DoctorEntity doctorEntity){
