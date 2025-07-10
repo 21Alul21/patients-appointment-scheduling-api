@@ -16,17 +16,14 @@ public class PatientService {
         
     }
 
-    // GET all patients in a particular organization where the orgAdmin belong
-    public List<UserEntity> getOrgUsers(UUID orgId){
-      if (orgId == null){
-          throw new IllegalArgumentException("organizationId not found");
-      }
-        UserEntiry currentUser = authUtils.getCurrentUser();
-        if (!currentUser.getOrganization().getOrganizationId().equalls(orgId)){
-           throw new AccessDeniedException("you do not have access to that organization data");
-        }
-       return userRepository.findAllByOrganizationId(orgId);
-    }
+    // GET all patients within the same organization as the current user
+public List<UserEntity> getOrgPatients() {
+    UserEntity currentUser = authUtils.getCurrentUser(); // already authenticated
+    UUID orgId = currentUser.getOrganization().getId();
+
+    return userRepository.findAllByOrganization_IdAndRole(orgId, RoleEnum.PATIENT);
+}
+
 
     // GET one patient
     public PatientDTO getPatient(UUID patientId) {
