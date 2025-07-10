@@ -1,16 +1,13 @@
 
 @RestController
+@RequiredAllArgsConstructor
 @RequestMapping("/appointment")
 public class AppointmentController{
 
   private final AppointmentService appointmentService;
   private final NotificationService notificationService;
   private final DoctorRepository doctorRepository;
-  public AppointmentController(AppointmentService appointmentService, NotificationService notificationService, DoctorRepository doctorRepository){
-  this.appointmentService = appointmentService;
-  this.notificationService = notificationService;
-  this.doctorRepository = doctorRepository;
-  }
+  
 
   // crete appointment and notification
   @PostMapping("/create-appointment")
@@ -45,6 +42,14 @@ public class AppointmentController{
     return ResponseEntity.ok(appointmentService.findById(id));
   }
 
+  // get all appointments related to an authenticated user
+  @GetMapping("/get-user-appointments")
+  public List<AppointmentEntity> getUserAppointments(){
+    UserEntity currentUser = authenticateUser();
+    UUID orgId = currentUser.getOrganization().getOrganizationId();
+    return appointmentRepository.findAllByOrganization_organizationIdAndUser_UserId(orgId, currentUser.getUserId());
+  }
+
   // update an appointment 
   @PatchMapping("/update-appointment/{id}")
   public ResponseEntity<AppointmentEntity> updateAppointment(@RequestBody AppointmentEntity appointmentEntity, @PathVariable UUID id){
@@ -54,6 +59,7 @@ public class AppointmentController{
      .body(update);
   }
 
+  // delete an appointment
   @DeleteMapping("/delete-appointment/{id}")
   public ResponseEntity<void> deleteAppointment(@PathaVariable UUID id){
     appointmentService.deleteAppointment(id);
