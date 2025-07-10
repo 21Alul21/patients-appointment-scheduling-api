@@ -1,14 +1,11 @@
 @Service
+@RequiredArgsConstructor
 public class PatientService {
     private final PatientRepository patientRepository;
     private final PatientMapper patientMapper;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtils jwtUtils;
 
-    public PatientService(PatientRepository patientRepository, PatientMapper patientMapper, PasswordEncoder passwordEncoder){
-      this.patientRepository = patientRepository;
-      this.patientMapper = patientMapper;
-       this.passwordEncoder = passwordEncoder;
-    }
 
     // GET all patients accross organizations by SUPERADMIN
     public List<PatientDTO> getPatients() {
