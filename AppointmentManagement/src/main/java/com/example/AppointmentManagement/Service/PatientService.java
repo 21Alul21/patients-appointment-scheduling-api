@@ -24,7 +24,7 @@ public List<UserEntity> getOrgPatients() {
     return userRepository
         .findAllByOrganization_OrganizationIdAndRole(orgId, RoleEnum.PATIENT)
         .stream()
-        .map(patientEntity::toDTO)
+        .map(patientMapper::toDTO)
         .collect(Collectors.toList());
 }
 
