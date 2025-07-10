@@ -22,7 +22,7 @@ public class PatientService {
           throw new IllegalArgumentException("organizationId not found");
       }
         UserEntiry currentUser = authUtils.getCurrentUser();
-        if (currentUser.getOrganization().getOrganizationId() != orgId){
+        if (!currentUser.getOrganization().getOrganizationId().equalls(orgId)){
            throw new AccessDeniedException("you do not have access to that organization data");
         }
        return userRepository.findAllByOrganizationId(orgId);
