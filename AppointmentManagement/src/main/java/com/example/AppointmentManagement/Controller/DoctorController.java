@@ -15,7 +15,7 @@ public class DoctorController{
       .ok(doctorService.getDoctor(doctorId));
   }
 
-  // SUPERADMIN can get all doctors across orgs
+  // SUPERADMIN can get doctors across all orgs
   @GetMapping("/all")
   public ResponseEntity<List<DoctorDTO>> getDoctors(){
     return ResponseEntity
