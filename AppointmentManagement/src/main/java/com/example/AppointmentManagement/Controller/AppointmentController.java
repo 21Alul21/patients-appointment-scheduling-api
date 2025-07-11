@@ -18,7 +18,7 @@ public class AppointmentController{
    UserEntity currentUser = jwtUtils.getCurrentUser();
    UUID currentUserOrgId = currentUser.getOrganization().organizationId();
    DoctorEntity doctor = userRepository.findByOrganization_OrganizationIdAndDoctor_DoctorId(currentUserOrgId, UUID appointmentEntity.getDoctorId());
-    UUID currentUserOrg = currentUser.getOrganization()
+    OrganizationEntity currentUserOrg = currentUser.getOrganization()
     appointmentEntity.setStatus("PENDING");
     appointmentEntity.setDoctor(doctor);
     appointmentEntity.setOrganization(currentUserOrg);
