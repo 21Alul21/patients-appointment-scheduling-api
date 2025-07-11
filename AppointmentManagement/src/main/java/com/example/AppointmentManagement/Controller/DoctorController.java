@@ -14,14 +14,26 @@ public class DoctorController{
       .ok(doctorService.getDoctor(doctorId));
   }
 
-  // Doctor in an organization getting list of all his appointments 
-  @GetMapping("/get-all-appointments-with-patients")
-  public ResponseEntity<List<AppointmentEntity>> getAppointmentsWithPatients(){
+  // Doctor in an organization getting list of all his // Doctor in an organization getting list of all their appointments
+@GetMapping("/get-all-appointments-with-patients")
+public ResponseEntity<List<AppointmentEntity>> getAppointmentsWithPatients() {
     UserEntity currentUser = authUtils.authenticateUser();
-    UUID organization = currentUser.getOrganization().getOrganizationId();
-    List<AppointmentEntity> appointments = appointmentRepository.findAllByDoctor_DoctorIdAndOrganization_OrganizationId();
+    UUID orgId = currentUser.getOrganization().getOrganizationId();
+
+    // Get doctorId from currentUser
+    DoctorEntity doctor = currentUser.getDoctor();
+    if (doctor == null) {
+        throw new RuntimeException("Current user is not a doctor");
+    }
+
+    UUID doctorId = doctor.getDoctorId();
+
+    List<AppointmentEntity> appointments =
+        appointmentRepository.findAllByDoctor_DoctorIdAndOrganization_OrganizationId(doctorId, orgId);
+
     return ResponseEntity.ok(appointments);
-  }
+}
+
   
   // SUPERADMIN can get doctors across all orgs
   @GetMapping("/all")
