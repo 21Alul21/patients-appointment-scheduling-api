@@ -12,7 +12,7 @@ public class AppointmentController{
   
 
   // crete appointment and notification by a patient in an organization 
-  // to be viewed by a doctor in same organization only
+  // to be viewed by a doctor in the same organization only
   @PostMapping("/create-appointment")
   public ResponseEntity<AppointmentEntity> createAppointment(@RequestBody AppointmentEntity appointmentEntity){
    UserEntity currentUser = jwtUtils.getCurrentUser();
