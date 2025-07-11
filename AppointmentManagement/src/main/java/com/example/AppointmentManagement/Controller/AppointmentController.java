@@ -8,14 +8,20 @@ public class AppointmentController{
   private final NotificationService notificationService;
   private final DoctorRepository doctorRepository;
   private final AuthUtils authUtils;
+  private final UserRepository userRepository;
   
 
-  // crete appointment and notification
+  // crete appointment and notification by a patient in an organization 
+  // to be viewed by a doctor in same organization only
   @PostMapping("/create-appointment")
   public ResponseEntity<AppointmentEntity> createAppointment(@RequestBody AppointmentEntity appointmentEntity){
-    DoctorEntity doctor = doctorRepository.findDoctorById(appointmentEntity.getDoctorId());
+   UserEntity currentUser = jwtUtils.getCurrentUser();
+   UUID currentUserOrgId = currentUser.getOrganization().organizationId();
+   DoctorEntity doctor = userRepository.findByOrganization_OrganizationIdAndDoctor_DoctorId(currentUserOrgId, UUID appointmentEntity.getDoctorId());
+    UUID currentUserOrg = currentUser.getOrganization()
     appointmentEntity.setStatus("PENDING");
     appointmentEntity.setDoctor(doctor);
+    appointmentEntity.setOrganization(currentUserOrg);
     AppointmentEntity createdAppointment = appointmentService.createAppointment(appointmentEntity);
    
    
