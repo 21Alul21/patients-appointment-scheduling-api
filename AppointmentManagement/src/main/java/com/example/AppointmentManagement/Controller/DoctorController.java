@@ -67,7 +67,8 @@ public ResponseEntity<List<AppointmentEntity>> getAppointmentsWithPatients() {
     if (!doctor.getOrganization().getOrganizationId().equals(appointment.getOrganization().getOrganizationId()){
        throw new RuntimeException("the doctor and appointment are not in the same organization");
     }
-    return appointment.setStatus(status.toUppercase());
+    return ResponseEntity
+      .ok(appointment.setStatus(status.toUppercase()));
   }
   
 
