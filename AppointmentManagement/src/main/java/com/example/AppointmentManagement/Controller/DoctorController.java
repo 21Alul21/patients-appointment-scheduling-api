@@ -14,7 +14,7 @@ public class DoctorController{
       .ok(doctorService.getDoctor(doctorId));
   }
 
-  // Doctor in an organization getting list of all his // Doctor in an organization getting list of all their appointments
+// Doctor in an organization getting list of all their appointments
 @GetMapping("/get-all-appointments-with-patients")
 public ResponseEntity<List<AppointmentEntity>> getAppointmentsWithPatients() {
     UserEntity currentUser = authUtils.authenticateUser();
@@ -48,6 +48,28 @@ public ResponseEntity<List<AppointmentEntity>> getAppointmentsWithPatients() {
       return ResponseEntity
         .ok(doctorService.getOrgDoctors());  
     }
+
+  // doctor can update the status of his appointment with a patient
+  @PatchMapping("/change-appointment-status/{appointmentId}")
+  public ResponseEntity<?> changeAppointmentStatus(@PathVariable UUID appointmentId, @RequestParam String status){
+    UserEntity currentUser = authUtils.authenticateUser();
+    UUID orgId = currentUser.getOrganization().getOrganizationId();
+
+    // Get doctorId from currentUser
+    DoctorEntity doctor = currentUser.getDoctor();
+    if (doctor == null) {
+        throw new RuntimeException("Current user is not a doctor");
+    }
+    AppointmentEntity appointment = appointmentRepository
+      .findById(appointmentId)
+      .orElseThrow(() -> new AppointmentNotFoundException("could’nt find the appointment"));
+
+    if (!doctor.getOrganization().getOrganizationId().equals(appointment.getOrganization().getOrganizationId()){
+       throw new RuntimeException("the doctor and appointment are not in the same organization");
+    }
+    return appointment.setStatus(status.toUppercase());
+  }
+  
 
   // SUPERADMIN can update a doctor record
   @PatchMapping("/update-profile/{doctorId}")
