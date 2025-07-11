@@ -49,27 +49,59 @@ public ResponseEntity<List<AppointmentEntity>> getAppointmentsWithPatients() {
         .ok(doctorService.getOrgDoctors());  
     }
 
-  // doctor can update the status of his appointment with a patient
   @PatchMapping("/change-appointment-status/{appointmentId}")
-  public ResponseEntity<?> changeAppointmentStatus(@PathVariable UUID appointmentId, @RequestParam String status){
+public ResponseEntity<?> changeAppointmentStatus(
+        @PathVariable UUID appointmentId,
+        @RequestParam String status) {
+
     UserEntity currentUser = authUtils.authenticateUser();
     UUID orgId = currentUser.getOrganization().getOrganizationId();
 
-    // Get doctorId from currentUser
+    // Check if the current user is a doctor
     DoctorEntity doctor = currentUser.getDoctor();
     if (doctor == null) {
         throw new RuntimeException("Current user is not a doctor");
     }
-    AppointmentEntity appointment = appointmentRepository
-      .findById(appointmentId)
-      .orElseThrow(() -> new AppointmentNotFoundException("could’nt find the appointment"));
 
-    if (!doctor.getOrganization().getOrganizationId().equals(appointment.getOrganization().getOrganizationId()){
-       throw new RuntimeException("the doctor and appointment are not in the same organization");
+    // Find the appointment
+    AppointmentEntity appointment = appointmentRepository.findById(appointmentId)
+            .orElseThrow(() -> new AppointmentNotFoundException("Couldn't find the appointment"));
+
+    // Ensure the appointment belongs to the same doctor and organization
+    if (!appointment.getDoctor().getDoctorId().equals(doctor.getDoctorId())) {
+        throw new RuntimeException("This appointment does not belong to the current doctor");
     }
-    return ResponseEntity
-      .ok(appointment.setStatus(status.toUppercase()));
-  }
+
+    if (!doctor.getOrganization().getOrganizationId().equals(appointment.getOrganization().getOrganizationId())) {
+        throw new RuntimeException("Doctor and appointment do not belong to the same organization");
+    }
+
+    // Update appointment status
+    AppointmentStatusEnum newStatus;
+    try {
+        newStatus = AppointmentStatusEnum.valueOf(status.toUpperCase());
+    } catch (IllegalArgumentException e) {
+        throw new RuntimeException("Invalid appointment status value");
+    }
+
+    appointment.setAppointmentStatus(newStatus);
+    appointmentRepository.save(appointment);
+
+    // Notify patient
+    NotificationEntity notification = new NotificationEntity();
+    notification.setMessage("Your appointment was " + newStatus.toString().toLowerCase());
+    notification.setSentAt(LocalDateTime.now());
+    notification.setIsRead(false);
+    notification.setStatus(newStatus.toString());
+    notification.setRecipient(appointment.getUser()); // patient
+    notification.setAppointment(appointment);
+    notification.setOrganization(appointment.getOrganization());
+
+    notificationService.createNotification(notification);
+
+    return ResponseEntity.ok("Appointment status updated and patient notified.");
+}
+
   
 
   // SUPERADMIN can update a doctor record
