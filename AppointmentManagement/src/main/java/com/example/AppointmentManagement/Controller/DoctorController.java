@@ -1,13 +1,12 @@
 
 @RestController
+@RequiredAllArgsConstructor
 @RequestMapping("/doctor")
 public class DoctorController{
   private final DoctorService doctorService;
- 
-  public DoctorController(DoctorService doctorService){
-    this.doctorService = doctorService;
-  }
+  private final AuthUtils authUtils;
 
+  
   // SUPERADMIN can get a doctor
   @GetMapping("/{doctorId}")
   public ResponseEntity<DoctorDTO> getDoctor(@PathVariable UUID doctorId){
@@ -15,6 +14,15 @@ public class DoctorController{
       .ok(doctorService.getDoctor(doctorId));
   }
 
+  // Doctor in an organization getting list of all his appointments 
+  @GetMapping("/get-all-appointments-with-patients")
+  public ResponseEntity<List<AppointmentEntity>> getAppointmentsWithPatients(){
+    UserEntity currentUser = authUtils.authenticateUser();
+    UUID organization = currentUser.getOrganization().getOrganizationId();
+    List<AppointmentEntity> appointments = appointmentRepository.findAllByDoctor_DoctorIdAndOrganization_OrganizationId();
+    return ResponseEntity.ok(appointments);
+  }
+  
   // SUPERADMIN can get doctors across all orgs
   @GetMapping("/all")
   public ResponseEntity<List<DoctorDTO>> getDoctors(){
