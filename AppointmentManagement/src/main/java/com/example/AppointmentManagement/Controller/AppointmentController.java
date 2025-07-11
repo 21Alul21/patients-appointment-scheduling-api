@@ -30,6 +30,7 @@ public class AppointmentController{
    notificationEntity.setSentAt(LocalDateTime.now());
    notificationEntity.setIsRead(false);
    notificationEntity.setStatus("PENDING");
+   notificationEntity.setOrganization(currentUserOrg);
    notificationEntity.setDoctor(doctor);
    notificationService.createNotification(notificationEntity);
     return ResponseEntity
