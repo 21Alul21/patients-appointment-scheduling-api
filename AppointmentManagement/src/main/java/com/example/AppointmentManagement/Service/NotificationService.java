@@ -1,11 +1,10 @@
 
 @Service
+@RequiredAllArgsConstructor
 public class NotificationService{
 
 private final NotificationRepository notificationRepository;
-piblic NotificationService(NotificationService notificationService){
- this.notificationRepository = notificationRepository;
-}
+private final SimpMessagingTemplate messagingTemplate;
 
  
 // CREATE notification for a booked appointment     
@@ -17,5 +16,23 @@ throw new IllegalArgumentException("empty notification");
 return notificationRepository.save(notificationEntity);
 
   } 
+
+    public void sendToDoctor(String doctorEmail, NotificationMessage message) {
+        messagingTemplate.convertAndSendToUser(
+            doctorEmail,
+            "/queue/notifications",
+            message
+        );
+    }
+
+    public void sendToPatient(String patientEmail, NotificationMessage message) {
+        messagingTemplate.convertAndSendToUser(
+            patientEmail,
+            "/queue/notifications",
+            message
+        );
+    }
+
+ 
 
 }
