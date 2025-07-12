@@ -87,7 +87,7 @@ public ResponseEntity<?> changeAppointmentStatus(
     appointment.setAppointmentStatus(newStatus);
     appointmentRepository.save(appointment);
 
-    // Notify patient
+    //crete Notification for the patient 
     NotificationEntity notification = new NotificationEntity();
     notification.setMessage("Your appointment was " + newStatus.toString().toLowerCase());
     notification.setSentAt(LocalDateTime.now());
@@ -99,10 +99,17 @@ public ResponseEntity<?> changeAppointmentStatus(
 
     notificationService.createNotification(notification);
 
+   // Notify patient via websocket
+    NotificationMessage message = new NotificationMessage(
+        "Your appointment was " + status.toUpperCase(),
+        doctorUser.getEmail(),
+        appointment.getAppointmentId().toString(),
+        LocalDateTime.now().toString()
+    );
+    notificationService.sendToPatient(appointment.getUser().getEmail(), message);
+
     return ResponseEntity.ok("Appointment status updated and patient notified.");
 }
-
-  
 
   // SUPERADMIN can update a doctor record
   @PatchMapping("/update-profile/{doctorId}")
