@@ -33,6 +33,16 @@ public class AppointmentController{
    notificationEntity.setOrganization(currentUserOrg);
    notificationEntity.setDoctor(doctor);
    notificationService.createNotification(notificationEntity);
+    
+   // Send notification to doctor
+    NotificationMessage message = new NotificationMessage(
+        "New appointment from " + currentUser.getEmail(),
+        currentUser.getEmail(),
+        appointment.getAppointmentId().toString(),
+        LocalDateTime.now().toString()
+    );
+    notificationService.sendToDoctor(doctor.getUser().getEmail(), message);
+    
     return ResponseEntity
     .status(HttpStatus.CREATED)
     .body(createdAppointment);
