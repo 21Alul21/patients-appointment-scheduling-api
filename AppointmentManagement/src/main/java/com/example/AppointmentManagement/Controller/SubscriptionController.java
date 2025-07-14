@@ -5,7 +5,7 @@ public class SubscriptionController{
   private final JwtUtils jwtUtils;
   private final OrganizationRepository organizationRepository;
   
-  @GetMapping("/trial-subscribtion")
+ @GetMapping("/trial-subscription")
   public ResponseEntity<?> orgSubscription(){
    // get current user request and confirm if it’s the admin
      UserEntity currentUser = jwtUtils.authenticateUser();
@@ -14,7 +14,8 @@ public class SubscriptionController{
   if (!organization.isTrial){
     throw new RuntimeException("You can no longer use a trial subscription");
   }
-  organization.setIstrial() = true;
+  organization.setIstrial(true);
+
   organization.setSubscriptionDuration(5);
   organizationRepository.save(organization);
    
