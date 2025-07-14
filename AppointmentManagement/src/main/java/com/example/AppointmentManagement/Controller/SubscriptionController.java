@@ -1,0 +1,3 @@
+@RestController
+public class SubscriptionController{
+}
