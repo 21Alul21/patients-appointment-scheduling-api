@@ -18,7 +18,6 @@ public class SubscriptionController{
   organization.setSubscriptionDuration(5);
   organizationRepository.save(organization);
    
-    // set the organization entity
     return ResponseEntity.ok(Map.of("message", "your trial version has been activated for 5 days"));
   }
 }
