@@ -16,7 +16,7 @@ public class SubscriptionController{
   }
   organization.setIstrial(true);
 
-  organization.setSubscriptionDuration(5);
+  organization.setSubscriptionDurationLeft(5);
   organizationRepository.save(organization);
    
     return ResponseEntity.ok(Map.of("message", "your trial version has been activated for 5 days"));
