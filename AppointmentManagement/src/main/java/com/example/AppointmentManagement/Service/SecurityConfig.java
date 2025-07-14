@@ -18,6 +18,8 @@ public class SecurityConfig {
             )
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterAfter(subscriptionCheckFilter, UsernamePasswordAuthenticationFilter.class);
+
 
         return http.build();
     }
