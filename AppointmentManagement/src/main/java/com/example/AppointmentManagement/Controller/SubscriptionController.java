@@ -1,7 +1,9 @@
 @RestController
 @RequestMapping("/org-admin")
+@RequiredAllArgsConstructor
 public class SubscriptionController{
-  
+  private final JwtUtils jwtUtils;
+  private final OrganizationRepository organizationRepository;
   
   @GetMapping("/trial-subscribtion")
   public ResponseEntity<?> orgSubscription(@RequestMapping SubscriptionDTO subscriptionDTO){
@@ -9,13 +11,14 @@ public class SubscriptionController{
      UserEntity currentUser = jwtUtils.authenticateUser();
      OrganizationEntity organization =  currentUser.getOrganization();
   // check if the organization has already used trial version before
-  if (organization.isTrial == true){
+  if (!organization.isTrial){
     throw new RuntimeException("You can no longer use a trial subscription");
   }
   organization.setIstrial() = true;
   organization.setSubscriptionDuration(5);
+  organizationRepository.save(organization);
    
     // set the organization entity
-    return ResponseEntity.ok(Map.of("message" : "your trial version has been activated"));
+    return ResponseEntity.ok(Map.of("message", "your trial version has been activated for 5 days"));
   }
 }
