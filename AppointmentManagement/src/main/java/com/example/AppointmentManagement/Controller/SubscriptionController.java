@@ -6,7 +6,7 @@ public class SubscriptionController{
   private final OrganizationRepository organizationRepository;
   
   @GetMapping("/trial-subscribtion")
-  public ResponseEntity<?> orgSubscription(@RequestMapping SubscriptionDTO subscriptionDTO){
+  public ResponseEntity<?> orgSubscription(){
    // get current user request and confirm if it’s the admin
      UserEntity currentUser = jwtUtils.authenticateUser();
      OrganizationEntity organization =  currentUser.getOrganization();
