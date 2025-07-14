@@ -10,6 +10,9 @@ public class OrganizationEntity {
 
     private String organizationName;
 
+    private Boolean isTrial;
+
+
     @Enumerated(EnumType.STRING)
     private SubscriptionStatus subscriptionStatus;
 
@@ -17,6 +20,9 @@ public class OrganizationEntity {
 
     private LocalDateTime registeredAt;
 
+    @OneToOne(mappedBy = "organization")
+    private AdminEntity admin;
+   
     @OneToMany(mappedBy = "organization", cascade = CascadeType.All)
     private List<UserEntity> users;
 
