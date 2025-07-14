@@ -20,8 +20,8 @@ public class OrganizationEntity {
 
     private LocalDateTime registeredAt;
 
-    @OneToOne(mappedBy = "organization", cascade = CascadeType.All, orphanRemoval = true)
-    private AdminEntity admin;
+    // @OneToOne(mappedBy = "organization", cascade = CascadeType.All, orphanRemoval = true)
+   // private AdminEntity admin;
    
     @OneToMany(mappedBy = "organization", cascade = CascadeType.All)
     private List<UserEntity> users;
