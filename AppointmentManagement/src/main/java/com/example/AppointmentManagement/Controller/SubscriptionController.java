@@ -5,9 +5,12 @@ public class SubscriptionController{
   
   @PostMapping("/subscribe")
   public ResponseEntity<?> orgSubscription(@RequestMapping SubscriptionDTO subscriptionDTO){
-   // get current request and confirm if it’s the admin
+   // get current user request and confirm if it’s the admin
      UserEntity currentUser = jwtUtils.authenticateUser();
-     UUID orgId =  currentUser.getOrganization().getOrganizationId();
+     OrganizationEntity organization =  currentUser.getOrganization();
+     // process the payment request
+
+    // set the organization entity
     return ResponseEntity.ok() 
   }
 }
