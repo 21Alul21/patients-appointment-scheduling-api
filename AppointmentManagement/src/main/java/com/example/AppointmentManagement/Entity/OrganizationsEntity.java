@@ -13,8 +13,8 @@ public class OrganizationEntity {
     private Boolean isTrial;
 
 
-    @Enumerated(EnumType.STRING)
-    private SubscriptionStatus subscriptionStatus;
+    // @Enumerated(EnumType.STRING)
+    // private SubscriptionStatus subscriptionStatus;
 
     private int subscriptionDurationLeft;
 
