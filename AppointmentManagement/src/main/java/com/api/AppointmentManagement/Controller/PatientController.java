@@ -1,4 +1,4 @@
-package com.api.AppointmentManagement.Controller
+package com.api.AppointmentManagement.Controller;
 
 @RestController
 @RequestMapping("/patients")
