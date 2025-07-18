@@ -1,3 +1,5 @@
+package com.api.AppointmentManagement.Entity;
+
 @Entity
 @Data
 @NoArgsConstructor
