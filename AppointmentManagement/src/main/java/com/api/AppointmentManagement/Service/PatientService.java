@@ -1,3 +1,5 @@
+package com.api.AppointmentManagement.Service;
+
 @Service
 @RequiredArgsConstructor
 public class PatientService {
