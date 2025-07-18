@@ -1,3 +1,4 @@
+package com.api.AppointmentManagement.DTO;
 
 @Data
 @AllArgsConstructor
