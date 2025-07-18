@@ -1,3 +1,4 @@
+package com.api.AppointmentManagement.Controller
 
 @Service
 public class AppointmentService{
