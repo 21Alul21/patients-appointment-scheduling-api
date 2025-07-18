@@ -1,3 +1,5 @@
+package com.api.AppointmentManagement.Controller
+
 @RestController
 @RequestMapping("/org-admin")
 @RequiredAllArgsConstructor
