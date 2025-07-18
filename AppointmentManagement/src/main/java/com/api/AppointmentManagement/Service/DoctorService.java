@@ -1,3 +1,4 @@
+package com.api.AppointmentManagement.Service;
 
 @Service
 public class DoctorService{
