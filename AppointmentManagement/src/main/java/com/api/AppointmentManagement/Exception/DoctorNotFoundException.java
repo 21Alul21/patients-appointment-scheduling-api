@@ -1,3 +1,5 @@
+package com.api.AppointmentManagement.Exception;
+
 public DoctorNotFoundException extends RuntimeException}
    public DoctorNotFoundException(String message){
     super(message);
