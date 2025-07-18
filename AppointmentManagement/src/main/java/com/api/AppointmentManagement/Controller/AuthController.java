@@ -1,3 +1,5 @@
+package com.api.AppointmentManagement.Controller
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
