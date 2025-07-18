@@ -1,3 +1,5 @@
+package com.api.AppointmentManagement.config;
+
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
