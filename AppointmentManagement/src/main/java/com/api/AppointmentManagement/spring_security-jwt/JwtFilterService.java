@@ -1,3 +1,5 @@
+package com.api.AppointmentManagement.spring_security-jwt;
+
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
