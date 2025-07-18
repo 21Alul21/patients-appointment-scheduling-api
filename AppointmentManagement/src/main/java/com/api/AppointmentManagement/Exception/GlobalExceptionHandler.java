@@ -1,3 +1,5 @@
+package com.api.AppointmentManagement.Exception;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
