@@ -1,3 +1,5 @@
+package com.api.AppointmentManagement.DTO;
+
 public class PatientMapper {
 
     public PatientDTO toDTO(PatientEntity patientEntity) {
