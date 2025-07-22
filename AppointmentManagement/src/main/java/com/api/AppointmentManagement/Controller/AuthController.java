@@ -1,7 +1,7 @@
 package com.api.AppointmentManagement.Controller;
 
 @RestController
-@RequiredArgsConstructor
+@RequiredAllArgsConstructor
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
@@ -12,7 +12,7 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final UserService userService;
 
-    @PostMapping("/register")
+    @PostMapping("/register-user")
     public ResponseEntity<UserEntity> registerUser(@RequestBody RegisterDTO registerDTO) {
         if (registerDTO == null) {
             throw new IllegalArgumentException("Registration fields cannot be empty");
