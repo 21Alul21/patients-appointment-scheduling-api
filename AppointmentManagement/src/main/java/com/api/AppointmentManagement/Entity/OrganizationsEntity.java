@@ -14,6 +14,8 @@ public class OrganizationEntity {
 
     private Boolean isTrial;
 
+    private UUID orgRegNumber;
+
 
     // @Enumerated(EnumType.STRING)
     // private SubscriptionStatus subscriptionStatus;
