@@ -10,12 +10,6 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtUtil jwtUtil;
-
-@RestController
-@RequiredArgsConstructor
-@RequestMapping("/api/v1/auth")
-public class AuthController {
-
     private final UserService userService;
 
     @PostMapping("/register")
@@ -25,7 +19,9 @@ public class AuthController {
         }
 
         UserEntity user = userService.registerUser(registerDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(user);
     }
 
     @PostMapping("/registerOrgAdmin")
@@ -34,14 +30,16 @@ public class AuthController {
             @RequestParam String orgName) {
 
         UserEntity orgAdmin = userService.registerOrgAdmin(registerDTO, orgName);
-        return ResponseEntity.status(HttpStatus.CREATED).body(orgAdmin);
+        return ResponseEntity
+            .status(HttpStatus.CREATED).body(orgAdmin);
     }
 }
 
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
-        authenticationManager.authenticate(
+        authenticationManager
+            .authenticate(
             new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
         );
 
