@@ -24,14 +24,14 @@ public class AuthController {
             .body(user);
     }
 
-    @PostMapping("/registerOrgAdmin")
-    public ResponseEntity<UserEntity> registerOrgAdmin(
-            @RequestBody RegisterDTO registerDTO,
-            @RequestParam String orgName) {
+    @PostMapping("/register-Org-Admin")
+    public ResponseEntity<UUID> registerOrgAdmin(
+            @RequestBody RegisterAdminOrgDTO registerDTO) {
 
-        UserEntity orgAdmin = userService.registerOrgAdmin(registerDTO, orgName);
+        UserEntity orgAdmin = userService.registerOrgAdmin(registerDTO);
         return ResponseEntity
-            .status(HttpStatus.CREATED).body(orgAdmin);
+            .status(HttpStatus.CREATED)
+            .body(orgRegNumber);
     }
 }
 
