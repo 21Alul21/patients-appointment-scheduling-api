@@ -37,4 +37,21 @@ public class JwtUtil {
                               .parseClaimsJws(token).getBody().getExpiration();
         return email.equals(ud.getUsername()) && exp.after(new Date());
     }
+    
+public Optional<UserEntity> getCurrentUser() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication != null && authentication.isAuthenticated()) {
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof CustomUserDetails customUser) {
+            String email = customUser.getUsername();
+            return userRepository.findByEmail(email);
+        }
+    }
+
+    return Optional.empty();
+}
+
+    
 }
