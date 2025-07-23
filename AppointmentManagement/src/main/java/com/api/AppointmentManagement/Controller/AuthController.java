@@ -26,7 +26,7 @@ public class AuthController {
 
     @PostMapping("/register-Org-Admin")
     public ResponseEntity<UUID> registerOrgAdmin(
-            @RequestBody RegisterAdminOrgDTO registerDTO) {
+            @RequestBody RegAdminOrgDTO registerDTO) {
 
         UUID orgRegNumber = userService.registerOrgAdmin(registerDTO);
         return ResponseEntity
