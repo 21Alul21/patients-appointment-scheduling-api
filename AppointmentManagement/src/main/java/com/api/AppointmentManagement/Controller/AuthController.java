@@ -28,7 +28,7 @@ public class AuthController {
     public ResponseEntity<UUID> registerOrgAdmin(
             @RequestBody RegisterAdminOrgDTO registerDTO) {
 
-        UserEntity orgAdmin = userService.registerOrgAdmin(registerDTO);
+        UUID orgRegNumber = userService.registerOrgAdmin(registerDTO);
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(orgRegNumber);
