@@ -14,9 +14,6 @@ public class AuthController {
 
     @PostMapping("/register-user")
     public ResponseEntity<UserEntity> registerUser(@RequestBody RegisterDTO registerDTO) {
-        if (registerDTO == null) {
-            throw new IllegalArgumentException("Registration fields cannot be empty");
-        }
 
         UserEntity user = userService.registerUser(registerDTO);
         return ResponseEntity
