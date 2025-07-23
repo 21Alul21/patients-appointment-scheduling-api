@@ -7,20 +7,37 @@ public class UserService {
     private final UserRepository userRepository;
     private final OrganizationRepository organizationRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     public UserEntity registerUser(RegisterDTO registerDTO) {
         
        if (registerDTO == null) {
             throw new IllegalArgumentException("User registration fields cannot be empty");
         }
-        OrganizationEntity organization = organizationRepository.findById(registerDTO.getOrganizationId())
+
+        Optional<UserEntity> currentUser = jwtUtil.getCurrentUser();
+        if (currentUser != null){
+            UserEntity authUser = currentUser.get();
+        }else {
+            if (registerDTO.getOrgRegNumber() == null){
+               raise new RuntimeException("non-admins must register with organization reg number");
+            }
+            OrganizationEntity organization = organizationRepository.findById(registerDTO.getOrganizationId())
             .orElseThrow(() -> new OrganizationNotFoundException("The organization ID provided is invalid"));
+        }
+        if (RoleEnum.valueOf(authUser.getRole()) != "ADMIN"){
+           throw new RuntimeException("logged in user have to be an admin to register a new user");
+        }
+        
 
         UserEntity user = new UserEntity();
         user.setEmail(registerDTO.getEmail());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));  // Secure password
         user.setRole(RoleEnum.valueOf(registerDTO.getRole().toUpperCase()));
-        user.setOrganization(organization);  
+        if (user != null){
+            user.Organization(authUser.getOrganization);
+        }
+         
 
         // Bi-directional relationship assignment
         if (user.getRole() == RoleEnum.PATIENT) {
