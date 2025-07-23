@@ -40,16 +40,16 @@ public class UserService {
     }
 
     
-    public UserEntity registerOrgAdmin(RegisterDTO dto, String orgName) {
-    if (dto == null || orgName == null) {
+    public UserEntity registerOrgAdmin(RegAdminOrgDTO dto) {
+    if (dto == null) {
         throw new IllegalArgumentException("Missing registration info");
     }
 
     // Create new organization with unique ID
     OrganizationEntity org = new OrganizationEntity();
-    org.setName(orgName);
+    org.setName(dto.getOrgName);
     String generatedOrgId = orgName.toLowerCase().replace(" ", "-") + "/" + UUID.randomUUID();
-    org.setOrganizationId(generatedOrgId);
+    org.setOrgRegNumber(generatedOrgId);
 
     // Create org admin user
     UserEntity user = new UserEntity();
@@ -59,7 +59,8 @@ public class UserService {
     user.setOrganization(org);
 
     organizationRepository.save(org);
-    return userRepository.save(user);
+    userRepository.save(user);
+    return generatedOrgId;
     }
 
   }
