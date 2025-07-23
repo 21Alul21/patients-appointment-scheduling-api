@@ -17,6 +17,7 @@ public class DoctorEntity{
     private String phoneNumber;
     private String meansOfIdentification;
     private String idNumber;
+    private Boolean verified = false;
     
     @Enumerated(EnumType.STRING)
     private SpecializationEnum specialization;
