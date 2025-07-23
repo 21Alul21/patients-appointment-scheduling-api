@@ -9,7 +9,10 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public UserEntity registerUser(RegisterDTO registerDTO) {
-
+        
+       if (registerDTO == null) {
+            throw new IllegalArgumentException("User registration fields cannot be empty");
+        }
         OrganizationEntity organization = organizationRepository.findById(registerDTO.getOrganizationId())
             .orElseThrow(() -> new OrganizationNotFoundException("The organization ID provided is invalid"));
 
