@@ -56,22 +56,23 @@ CardPaymentRequestDTO.Customer customer = new CardPaymentRequestDTO.Customer();
 customer.setEmail(subscriptionDTO.getEmail());
 customer.setName(subscriptionDTO.getName());
 
-paymentRequest.setTx_ref("TX-123456789");
-paymentRequest.setAmount(5000);
+paymentRequest.setTx_ref("TX-" + UUID.randomUUID().toString());
+paymentRequest.setAmount(price);
 paymentRequest.setCurrency("NGN");
 paymentRequest.setRedirect_url("");
 paymentRequest.setCustomer(customer);
 paymentRequest.setPayment_options("card");
 
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.APPLICATION_JSON);
+headers.setBearerAuth(FLW-SECRET-KEY);
+
+HttpEntity<CardPaymentRequestDTO> request = new HttpEntity(paymentRequest, headers);
+String flutterwaveUrl = "https://api.flutterwave.com/v3/payments";
       
-      // logic to make payment using flutterwave API
-      
-    }
+ResponseEntity<String> response = restTemplate.postForEntity(flutterwaveUrl, request, String.class);
+
     return ResponseEntity
-     .ok(HTTPSTATUS.CREATED)
-     .body(Map.of("payment status": "payment successful");
-     
-  }
-  
-  //implement subscription logic here
-}
+      .ok(response.getBody());     
+    }
+    
