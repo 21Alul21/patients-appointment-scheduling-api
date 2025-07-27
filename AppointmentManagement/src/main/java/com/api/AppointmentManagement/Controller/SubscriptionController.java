@@ -50,7 +50,20 @@ public class SubscriptionController{
       } 
     OrganizationEntity organizationEntity = authUser.getOrganization();
     if (organizationEntity != null){
+       CardPaymentRequestDTO paymentRequest = new CardPaymentRequestDTO();
 
+CardPaymentRequestDTO.Customer customer = new CardPaymentRequestDTO.Customer();
+customer.setEmail(subscriptionDTO.getEmail());
+customer.setName(subscriptionDTO.getName());
+
+paymentRequest.setTx_ref("TX-123456789");
+paymentRequest.setAmount(5000);
+paymentRequest.setCurrency("NGN");
+paymentRequest.setRedirect_url("");
+paymentRequest.setCustomer(customer);
+paymentRequest.setPayment_options("card");
+
+      
       // logic to make payment using flutterwave API
       
     }
