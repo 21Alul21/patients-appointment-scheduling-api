@@ -1,2 +1,19 @@
-public CardPaymentRequestDTO{
+package com.api.AppointmentManagement.DTO;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+@NoArgsCobstructor
+public class CardPaymentRequestDTO {
+    private String tx_ref;
+    private int amount;
+    private String currency;
+    private String redirect_url;
+    private Customer customer;
+    private String payment_options = "card"; // default to card
+
+    @Data
+    public static class Customer {
+        private String email;
+        private String name;
 }
